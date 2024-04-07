@@ -1,9 +1,9 @@
 package model
 
 class DraftUser(
-    var username: String,
     var email: String,
-    var password: String
+    var password: String,
+    var username: String
 )
 
 class DraftLogin(

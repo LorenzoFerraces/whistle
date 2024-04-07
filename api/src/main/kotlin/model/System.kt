@@ -12,7 +12,7 @@ class System(private val dataManager: DataManager) {
 
     //Login
     fun login(email: String, password: String): User {
-        return users.find { it.email == email && it.password == password } ?: throw UserException("Login Error")
+        return users.find { it.email == email && it.password == password } ?: throw UserNotFoundException()
     }
 
     fun addUser(draft: DraftUser): User {
