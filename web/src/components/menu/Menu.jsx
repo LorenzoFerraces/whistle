@@ -4,22 +4,26 @@ import { AuthContext } from '../../api/AuthContext';
 import './Menu.css';
 
 const Menu = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, logOut } = useContext(AuthContext);
 
   return (
     <header id="main-menu">
       <NavLink to="/">
         <div className="left">
-          <span>WHISTLE</span>
+          <span></span>
         </div>
       </NavLink>
       <div className="center">
         <NavLink to="/tournaments">
-          <span>My Tournaments</span>
+          <span>WHISTLE</span>
         </NavLink>
       </div>
       <div className="right">
-        {userInfo.logged ? null : (
+        {userInfo.logged ? (
+          <a onClick={() => logOut()}>
+            <span>Log Out</span>
+          </a>
+        ) : (
           <NavLink to="/login">
             <span>Log In</span>
           </NavLink>

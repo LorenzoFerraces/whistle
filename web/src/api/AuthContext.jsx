@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }) => {
       logged: false,
     });
     setUserLoad(false);
-    window.location.href = '/store';
+    window.location.href = '/login';
   };
 
   const postRegister = (email, password, username, setSucces) => {
@@ -154,6 +154,18 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setUserLoad(true));
   };
 
+  const getUser = (id, setUser, setSucces) => {
+    setSucces(false);
+    setError();
+    axios
+      .get(url + `/user/${id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setSucces(true));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -164,6 +176,7 @@ export const AuthProvider = ({ children }) => {
         logOut,
         postRegister,
         setError,
+        getUser,
       }}
     >
       <ToastContainer />

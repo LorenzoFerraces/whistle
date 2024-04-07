@@ -22,12 +22,19 @@
   justify-content: center;
 }
 
+#main-menu .center span {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--c3);
+}
+
 #main-menu .right {
   margin-left: auto;
 }
 
 #main-menu .right {
   text-align: right;
+  cursor: pointer;
 }
 
 #main-menu span {

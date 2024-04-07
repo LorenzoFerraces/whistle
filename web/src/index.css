@@ -10,12 +10,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --back: #242424;
-  --c1: #191e33;
-  --c2: #040920;
-  --c3: #88d1fb;
+  --back: #1e2329;
+  --c1: #45474b;
+  --c2: #383a3d;
+  --c3: #db4105;
   --text: white;
-  --line: #244050;
+  --line: #e1e1e2;
 }
 
 a {
@@ -31,4 +31,25 @@ a:hover {
 body {
   margin: 0;
   padding: 0;
+}
+
+.element {
+  padding: 10px;
+  background-color: var(--c1);
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.main {
+  width: 95%;
+  margin: 0px auto;
+  margin-top: 15px;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: 2rem;
 }
