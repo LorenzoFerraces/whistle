@@ -17,5 +17,6 @@ class Tournament (
     val id: String,
     var name: String,
     var description: String,
-    val user: SimpleUser
+    val date: String,
+    val user: SimpleUser,
 )

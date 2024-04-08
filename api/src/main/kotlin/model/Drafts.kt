@@ -13,5 +13,6 @@ class DraftLogin(
 
 class DraftTournament(
     val name: String,
-    val description: String
+    val description: String,
+    val date: String
 )

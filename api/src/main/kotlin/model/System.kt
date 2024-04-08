@@ -1,5 +1,8 @@
 package model
 
+import model.gen.tournamentsGEN
+import model.gen.usersGEN
+
 class System(private val dataManager: DataManager) {
     var users = mutableListOf<User>()
     var tournaments = mutableListOf<Tournament>()
@@ -37,6 +40,7 @@ class System(private val dataManager: DataManager) {
             idGenerator.getTournamentId(),
             draft.name,
             draft.description,
+            draft.date,
             SimpleUser(user.id, user.username)
         )
         tournaments.add(tournament)
@@ -59,4 +63,30 @@ class System(private val dataManager: DataManager) {
         user.tournaments.remove(tournament)
         dataManager.saveData(this)
     }
+
+    //Dev
+    fun createData() {
+        this.addUsers()
+        this.addTournaments()
+    }
+
+    private fun addUsers() {
+        for (draftUser in usersGEN){
+            this.addUser(draftUser)
+        }
+    }
+
+    private fun addTournaments() {
+        val availableTournaments = tournamentsGEN.toMutableList()
+        for (user in this.users){
+            val numTournamentsToAdd = (2..6).random()
+            availableTournaments.shuffle()
+            for (i in 0 until numTournamentsToAdd) {
+                if (availableTournaments.isNotEmpty()) {
+                    val draftTournament = availableTournaments.removeAt(0)
+                    addTournament(user.id, draftTournament)
+                    }
+                }
+            }
+        }
 }
