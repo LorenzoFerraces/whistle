@@ -20,7 +20,7 @@ class Api {
     private val tournamentController = TournamentController(service, tokenController)
 
     fun start() {
-        service.createData()
+        //service.createData()
         val app = Javalin.create { config ->
             config.http.defaultContentType = "application/json"
             config.accessManager(tokenController::validate)

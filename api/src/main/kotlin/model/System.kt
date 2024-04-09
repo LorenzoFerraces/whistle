@@ -41,6 +41,7 @@ class System(private val dataManager: DataManager) {
             draft.name,
             draft.description,
             draft.date,
+            true,
             SimpleUser(user.id, user.username)
         )
         tournaments.add(tournament)

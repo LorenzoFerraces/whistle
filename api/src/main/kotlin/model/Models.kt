@@ -18,5 +18,6 @@ class Tournament (
     var name: String,
     var description: String,
     val date: String,
+    val status: Boolean,
     val user: SimpleUser,
 )

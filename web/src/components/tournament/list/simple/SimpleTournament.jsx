@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import './SimpleTournament.css';
 import { SlCalender } from 'react-icons/sl';
+import { FaCircle } from 'react-icons/fa6';
 
 const SimpleTournament = ({ tournament }) => {
   return (
@@ -9,7 +10,10 @@ const SimpleTournament = ({ tournament }) => {
         {tournament.image ? (
           <img src={tournament.image}></img>
         ) : (
-          <img src="../../../../assets/t.jpg" alt="Tournament" />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
+            alt="Tournament"
+          />
         )}
       </div>
       <div className="content">
@@ -22,6 +26,19 @@ const SimpleTournament = ({ tournament }) => {
             <div className="date">
               <SlCalender />
               <span>{tournament.date}</span>
+              <div>
+                {tournament.status ? (
+                  <div className="status">
+                    <FaCircle color="green" />
+                    <span>OPEN</span>
+                  </div>
+                ) : (
+                  <div className="status">
+                    <FaCircle color="red" />
+                    <span>CLOSED</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ) : (

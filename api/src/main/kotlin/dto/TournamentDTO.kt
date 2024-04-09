@@ -8,6 +8,7 @@ class TournamentDTO() {
     lateinit var name: String
     lateinit var description: String
     lateinit var date: String
+    lateinit var status: String
     lateinit var user: SimpleUser
 
     constructor(tournament: Tournament): this() {
@@ -15,6 +16,7 @@ class TournamentDTO() {
         this.name = tournament.name
         this.description = tournament.description
         this.date = tournament.date
+        this.status = tournament.status.toString()
         this.user = tournament.user
     }
 }

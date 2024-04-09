@@ -5,6 +5,7 @@ import Create from './routes/Create';
 import Tournaments from './routes/Tournaments';
 import Tournament from './routes/Tournament';
 import { Private } from './routes/Private';
+import NotFound from './routes/NotFound';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             </Private>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
