@@ -2,6 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color: var(--text);
 
   color-scheme: light dark;
   background-color: var(--back);
@@ -52,4 +53,5 @@ h3 {
   margin-bottom: 5px;
   width: 100%;
   font-size: 2rem;
+  color: var(--text);
 }
