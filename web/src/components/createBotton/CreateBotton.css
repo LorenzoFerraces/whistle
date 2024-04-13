@@ -1,0 +1,19 @@
+.create-button {
+  border-radius: 50%;
+  background-color: var(--c3);
+  color: var(--text);
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-button span {
+  font-size: 60px; /* Tamaño del símbolo + */
+  line-height: 30px; /* Igualar la altura del botón para centrar verticalmente */
+}
