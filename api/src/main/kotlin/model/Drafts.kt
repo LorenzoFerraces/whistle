@@ -1,5 +1,7 @@
 package model
 
+import java.util.Date
+
 class DraftUser(
     var email: String,
     var password: String,
@@ -14,5 +16,7 @@ class DraftLogin(
 class DraftTournament(
     val name: String,
     val description: String,
-    val date: String
+    val date: Date,
+    val teams: List<String>,
+    val sport: String
 )
