@@ -1,7 +1,5 @@
 package model
 
-import java.util.*
-
 class User(
     val id: String,
     val username: String,
@@ -15,12 +13,12 @@ class SimpleUser (
     val username: String,
 )
 
-class Tournament (
+class Tournament(
     val id: String,
     var name: String,
     var description: String,
     var sport: String,
-    val date: Date,
+    val date: String,
     var teams: List<String>,
     val status: Boolean,
     val user: SimpleUser,

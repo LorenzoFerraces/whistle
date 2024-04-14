@@ -21,14 +21,13 @@ class TournamentDTO() {
         this.id = tournament.id
         this.name = tournament.name
         this.description = tournament.description
-        val formatter = SimpleDateFormat("dd,MM,yyyy")
-        this.date = formatter.format(tournament.date).toString()
+        this.date = tournament.date
         this.status = tournament.status.toString()
-        val normalizedTeams = tournament.teams.map {it -> it.lowercase() }
+        val normalizedTeams = tournament.teams.map { it.lowercase() }
         if (normalizedTeams.distinct().count() != normalizedTeams.count()) {
             throw DuplicatedTeamException()
         }
-        this.teams = tournament.teams.map { it -> Team(it) }
+        this.teams = tournament.teams.map { Team(it) }
         this.user = tournament.user
     }
 }
