@@ -22,8 +22,11 @@ class TournamentController(private var system: System, private var tokenControll
             try {
                 var tournament = system.addTournament(tokenController.tokenToUserId(context), tournamentREQ)
                 context.json(TournamentDTO(tournament))
+
             } catch (e: UserNotFoundException) {
                 tokenController.errorResponse(context, HttpStatus.UNAUTHORIZED, "User unauthorized")
+            } catch (e: DuplicatedTeamException) {
+                tokenController.errorResponse(context, HttpStatus.UNPROCESSABLE_CONTENT, "Duplicated Team")
             }
         }
     }
