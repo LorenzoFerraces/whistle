@@ -16,7 +16,7 @@ class DraftLogin(
 class DraftTournament(
     val name: String,
     val description: String,
-    val date: Date,
+    val date: String,
     val teams: List<String>,
     val sport: String
 )
