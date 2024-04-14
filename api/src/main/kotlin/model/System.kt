@@ -40,7 +40,9 @@ class System(private val dataManager: DataManager) {
             idGenerator.getTournamentId(),
             draft.name,
             draft.description,
+            draft.sport,
             draft.date,
+            draft.teams,
             true,
             SimpleUser(user.id, user.username)
         )
