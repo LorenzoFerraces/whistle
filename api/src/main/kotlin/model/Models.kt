@@ -19,7 +19,7 @@ class Tournament(
     var description: String,
     var sport: String,
     val date: String,
-    var teams: List<String>,
+    var teams: List<Team>,
     val status: Boolean,
     val user: SimpleUser,
 )

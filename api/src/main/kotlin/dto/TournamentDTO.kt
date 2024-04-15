@@ -21,13 +21,10 @@ class TournamentDTO() {
         this.id = tournament.id
         this.name = tournament.name
         this.description = tournament.description
+        this.sport = tournament.sport
         this.date = tournament.date
         this.status = tournament.status.toString()
-        val normalizedTeams = tournament.teams.map { it.lowercase() }
-        if (normalizedTeams.distinct().count() != normalizedTeams.count()) {
-            throw DuplicatedTeamException()
-        }
-        this.teams = tournament.teams.map { Team(it) }
+        this.teams = tournament.teams
         this.user = tournament.user
     }
 }

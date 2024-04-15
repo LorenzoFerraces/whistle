@@ -35,14 +35,26 @@ class System(private val dataManager: DataManager) {
 
     // Tournaments
     fun addTournament(userId: String, draft: DraftTournament): Tournament {
+
+        val normalizedTeams = draft.teams.map { it.lowercase() }
+        if (normalizedTeams.distinct().count() != normalizedTeams.count()) {
+            throw DuplicatedTeamException()
+        }
+
         val user = this.getUser(userId)
+
+        var teams = mutableListOf<Team>()
+        draft.teams.forEach{
+                teamName -> teams.add(Team(teamName))
+        }
+
         val tournament = Tournament(
             idGenerator.getTournamentId(),
             draft.name,
             draft.description,
             draft.sport,
             draft.date,
-            draft.teams,
+            teams,
             true,
             SimpleUser(user.id, user.username)
         )
