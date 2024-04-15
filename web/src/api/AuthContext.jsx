@@ -166,6 +166,45 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSucces(true));
   };
 
+  const postTornament = (
+    name,
+    description,
+    date,
+    teams,
+    sport,
+    setTournament,
+    setSucces,
+  ) => {
+    setSucces(false);
+    setError();
+    axios
+      .post(url + '/tournament', {
+        name,
+        description,
+        date,
+        teams,
+        sport,
+      })
+      .then((response) => {
+        const data = response.data;
+        setTournament(data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setSucces(true));
+  };
+
+  const getTournament = (id, setTournament, setSucces) => {
+    setSucces(false);
+    setError();
+    axios
+      .get(url + `/tournament/${id}`)
+      .then((response) => {
+        setTournament(response.data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setSucces(true));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -177,6 +216,8 @@ export const AuthProvider = ({ children }) => {
         postRegister,
         setError,
         getUser,
+        postTornament,
+        getTournament,
       }}
     >
       <ToastContainer />

@@ -17,3 +17,7 @@
   font-size: 60px; /* Tamaño del símbolo + */
   line-height: 30px; /* Igualar la altura del botón para centrar verticalmente */
 }
+
+.create-button :hover {
+  color: var(--c2);
+}

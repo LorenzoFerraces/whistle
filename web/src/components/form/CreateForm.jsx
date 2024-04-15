@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../../api/AuthContext';
 
 const CreateForm = () => {
@@ -8,9 +7,11 @@ const CreateForm = () => {
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [teamName, setTeamName] = useState('');
+  const [teamsNames, setTeamsNames] = useState([]);
   const [teams, setTeams] = useState([]);
-  const { setError } = useContext(AuthContext);
-  const navigate = useNavigate(); 
+  const { setError, postTornament, succesHandler } = useContext(AuthContext);
+  const [tournament, setTournament] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,12 +20,22 @@ const CreateForm = () => {
       setError('Please fill out all fields.');
       return;
     }
-    if (teams.length < 2){
+    if (teams.length < 2) {
       setError('Please add at least 2 teams.');
       return;
     }
+    console.log(teams);
+    console.log(teamsNames);
     // Crear el torneo
-    navigate('/'); 
+    postTornament(
+      tournamentName,
+      description,
+      selectedDate,
+      teamsNames,
+      sport,
+      setTournament,
+      setSuccess,
+    );
   };
 
   const handleDateChange = (e) => {
@@ -39,11 +50,14 @@ const CreateForm = () => {
 
   const addTeam = () => {
     if (teamName.trim() === '') return;
-    if (teams.find((team) => team.name.toLowerCase() === teamName.toLowerCase())) {
+    if (
+      teams.find((team) => team.name.toLowerCase() === teamName.toLowerCase())
+    ) {
       setError('Team name already exists.');
       return;
     }
     setTeams([...teams, { name: teamName }]);
+    setTeamsNames([...teamsNames, teamName]);
     setTeamName('');
   };
 
@@ -102,6 +116,9 @@ const CreateForm = () => {
           </div>
           <button type="submit">Create</button>
         </form>
+        {success && tournament
+          ? succesHandler('Login Success', `/tournament/${tournament.id}`)
+          : null}
       </div>
     </div>
   );

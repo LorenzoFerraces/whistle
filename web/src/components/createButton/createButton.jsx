@@ -1,15 +1,14 @@
 import { NavLink } from 'react-router-dom';
-import './CreateBotton.css';
+import './createButton.css';
 
-const CreateBotton = () => {
-
+const CreateButton = () => {
   return (
     <div className="create-button">
       <NavLink to="/create">
         <span>+</span>
-      </NavLink> 
+      </NavLink>
     </div>
   );
 };
 
-export default CreateBotton;
+export default CreateButton;
