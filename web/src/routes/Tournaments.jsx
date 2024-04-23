@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import Menu from '../components/menu/Menu';
 import TournamentList from '../components/tournament/list/TournamentList';
-import CreateButton from '../components/createButton/createButton';
+import CreateButton from '../components/buttons/createButton/createButton';
 import { AuthContext } from '../api/AuthContext';
 
 const Tournaments = () => {

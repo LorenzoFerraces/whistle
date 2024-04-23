@@ -1,5 +1,6 @@
 package model
 
+import model.Result
 import model.gen.tournamentsGEN
 import model.gen.usersGEN
 
@@ -104,4 +105,42 @@ class System(private val dataManager: DataManager) {
                 }
             }
         }
+
+    fun addTournamentResult(tournamentID: String, tournamentResultREQ: DraftTournamentResult): Tournament {
+        var tournament = getTournament(tournamentID)
+        var team1 = getTeamFromTournament(tournament,tournamentResultREQ.team1)
+        var team2 = getTeamFromTournament(tournament,tournamentResultREQ.team2)
+        var resultMatch = statesOfMatch(tournamentResultREQ.goals1,tournamentResultREQ.goals2)
+        updateTeamResult(team1,resultMatch[0],tournamentResultREQ.goals1,tournamentResultREQ.goals2)
+        updateTeamResult(team2,resultMatch[1],tournamentResultREQ.goals2,tournamentResultREQ.goals1)
+        dataManager.saveData(this)
+        return getTournament(tournamentID)
+    }
+
+    fun getTeamFromTournament(tournament: Tournament, teamName: String): Team{
+        return tournament.teams.find { it.name == teamName } ?: throw NotTournamentFoundException()
+    }
+
+    fun statesOfMatch(goals1: Int, goals2: Int): List<String>{
+        return if (goals1 > goals2){
+                    listOf("Win","Lose")
+                }else if(goals1 < goals2){
+                    listOf("Lose","Win")
+                }else{
+                    listOf("Draw","Draw")
+                }
+    }
+
+    fun updateTeamResult(team: Team,result: String,myGoals:Int,enemyGoals:Int){
+        team.goalsFavour += myGoals
+        team.goalsAgainst += enemyGoals
+        if(result == "Win"){
+            team.wins++
+        }else if(result == "Lose"){
+            team.losses++
+        }else{
+            team.draws++
+        }
+    }
+
 }

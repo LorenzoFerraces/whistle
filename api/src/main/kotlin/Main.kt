@@ -51,6 +51,7 @@ class Api {
                 ApiBuilder.path("{id}") {
                     ApiBuilder.get(tournamentController::getTournament, Roles.ANYONE)
                     ApiBuilder.delete(tournamentController::deleteTournament, Roles.USER)
+                    ApiBuilder.post(tournamentController::postTournamentResult, Roles.USER)
                 }
             }
         }

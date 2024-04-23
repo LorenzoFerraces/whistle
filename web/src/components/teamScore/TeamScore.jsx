@@ -1,7 +1,6 @@
 import './TeamScore.css';
 
 const TeamScore = ({ team }) => {
-  console.log(team);
   return (
     <>
       <div className="header-team-score-container">
@@ -21,16 +20,3 @@ const TeamScore = ({ team }) => {
 };
 
 export default TeamScore;
-
-/* 
-      <tr key={team.name}>
-        <td>{team.name}</td>
-        <td>{team.wins * 2 + team.draw}</td>
-        <td>{team.wins}</td>
-        <td>{team.losses}</td>
-        <td>{team.draw}</td>
-        <td>{team.goalsFavour}</td>
-        <td>{team.goalsAgainst}</td>
-        <td>{team.goalsFavour - team.goalsAgainst}</td>
-      </tr>
-*/

@@ -20,3 +20,10 @@ class DraftTournament(
     val teams: List<String>,
     val sport: String
 )
+
+class DraftTournamentResult(
+    val team1: String,
+    val team2: String,
+    val goals1: Int,
+    val goals2: Int
+    )

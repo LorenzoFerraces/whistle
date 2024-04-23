@@ -55,4 +55,19 @@ class TournamentController(private var system: System, private var tokenControll
             tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "Tournament not found")
         }
     }
+
+    fun postTournamentResult(context: Context){
+        tokenController.validateAndProcessBody<DraftTournamentResult>(context) { tournamentResultREQ ->
+            try {
+                val idTornament = context.pathParam("id")
+                val tournament = system.addTournamentResult(idTornament, tournamentResultREQ)
+                context.json(TournamentDTO(tournament))
+
+            } catch (e: NotTournamentFoundException) {
+                tokenController.errorResponse(context, HttpStatus.UNAUTHORIZED, "User unauthorized")
+            } catch (e: DuplicatedTeamException) {
+                tokenController.errorResponse(context, HttpStatus.UNPROCESSABLE_CONTENT, "Duplicated Team")
+            }
+        }
+    }
 }

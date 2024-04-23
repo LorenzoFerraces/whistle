@@ -26,11 +26,11 @@ class Tournament(
 
 class Team (
     val name: String,
-    val wins: Int = 0,
-    val losses: Int = 0,
-    val draws: Int = 0,
-    val goalsFavour: Int = 0,
-    val goalsAgainst: Int = 0
+    var wins: Int = 0,
+    var losses: Int = 0,
+    var draws: Int = 0,
+    var goalsFavour: Int = 0,
+    var goalsAgainst: Int = 0
 )
 
 class Result (

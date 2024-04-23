@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }) => {
       theme: 'dark',
       transition: Bounce,
     });
-    console.log(error);
   };
 
   const succesHandler = (text, url) => {
@@ -205,6 +204,27 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSucces(true));
   };
 
+  const postTornamentResult = (
+    tournamentId,
+    team1,
+    team2,
+    goals1,
+    goals2,
+    setSuccess,
+  ) => {
+    setSuccess(false);
+    setError();
+    axios
+      .post(url + `/tournament/${tournamentId}`, {
+        team1,
+        team2,
+        goals1,
+        goals2,
+      })
+      .catch((error) => setError(error))
+      .finally(() => setSuccess(true));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -218,6 +238,7 @@ export const AuthProvider = ({ children }) => {
         getUser,
         postTornament,
         getTournament,
+        postTornamentResult,
       }}
     >
       <ToastContainer />

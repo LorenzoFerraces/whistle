@@ -24,9 +24,6 @@ const CreateForm = () => {
       setError('Please add at least 2 teams.');
       return;
     }
-    console.log(teams);
-    console.log(teamsNames);
-    // Crear el torneo
     postTornament(
       tournamentName,
       description,
