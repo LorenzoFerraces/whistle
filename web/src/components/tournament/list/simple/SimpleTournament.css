@@ -1,0 +1,57 @@
+.simple-tournament {
+  background-color: var(--c2);
+  border: 3px solid var(--c3);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 3px;
+  display: flex;
+  height: 110px;
+  position: relative;
+}
+
+.simple-tournament .image {
+  flex: 0 0 auto;
+}
+
+.simple-tournament .image img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8%;
+}
+
+.simple-tournament .content {
+  flex: 1;
+  margin-right: 10px;
+  margin-left: 10px;
+  display: flex;
+  position: relative;
+}
+
+.simple-tournament .content .name {
+  font-weight: 600;
+  font-size: 1.7em;
+}
+
+.simple-tournament .content .info {
+  flex-grow: 1;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.simple-tournament .content .date {
+  color: gray;
+  margin-top: auto;
+}
+
+.simple-tournament .content .date span {
+  margin-left: 5px;
+}
+
+.simple-tournament .status {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+}

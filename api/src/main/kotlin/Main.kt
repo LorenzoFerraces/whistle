@@ -1,0 +1,61 @@
+import controller.HEADER_NAME
+import controller.TokenController
+import controller.TournamentController
+import controller.UserController
+import io.javalin.Javalin
+import io.javalin.apibuilder.ApiBuilder
+import io.javalin.security.RouteRole
+import model.DataManager
+import model.System
+
+internal enum class Roles: RouteRole {
+    ANYONE, USER
+}
+
+class Api {
+    private val dataManager = DataManager()
+    private val service = System(dataManager)
+    private val tokenController = TokenController(service)
+    private val userController = UserController(service, tokenController)
+    private val tournamentController = TournamentController(service, tokenController)
+
+    fun start() {
+        //service.createData()
+        val app = Javalin.create { config ->
+            config.http.defaultContentType = "application/json"
+            config.accessManager(tokenController::validate)
+            config.plugins.enableCors { cors -> cors.add {
+                it.anyHost()
+                it.exposeHeader(HEADER_NAME)
+            } }
+        }.start(8001)
+        app.routes {
+            ApiBuilder.path("login") {
+                ApiBuilder.post(userController::postLogin, Roles.ANYONE)
+            }
+            ApiBuilder.path("register") {
+                ApiBuilder.post(userController::postRegister, Roles.ANYONE)
+            }
+            ApiBuilder.path("user") {
+                ApiBuilder.get(userController::getUsers, Roles.ANYONE)
+                ApiBuilder.path("current") {
+                    ApiBuilder.get(userController::getCurrentUser, Roles.USER)
+                }
+                ApiBuilder.path("{id}") {
+                    ApiBuilder.get(userController::getUser, Roles.ANYONE)
+                }
+            }
+            ApiBuilder.path("tournament") {
+                ApiBuilder.get(tournamentController::getAllTournaments, Roles.ANYONE)
+                ApiBuilder.post(tournamentController::postTournament, Roles.USER)
+                ApiBuilder.path("{id}") {
+                    ApiBuilder.get(tournamentController::getTournament, Roles.ANYONE)
+                    ApiBuilder.delete(tournamentController::deleteTournament, Roles.USER)
+                    ApiBuilder.post(tournamentController::postTournamentResult, Roles.USER)
+                }
+            }
+        }
+    }
+}
+
+fun main() = Api().start()

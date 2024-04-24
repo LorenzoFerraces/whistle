@@ -1,0 +1,44 @@
+#main-menu {
+  background: var(--c2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#main-menu .left {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: larger;
+}
+
+#main-menu .center {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-menu .center span {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--c3);
+}
+
+#main-menu .right {
+  margin-left: auto;
+}
+
+#main-menu .right {
+  text-align: right;
+  cursor: pointer;
+}
+
+#main-menu span {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: larger;
+}

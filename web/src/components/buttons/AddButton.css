@@ -1,0 +1,25 @@
+.add-button {
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-button button {
+  background: var(--c3);
+  border-radius: 50px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 10px;
+  text-align: center;
+}
+
+.add-button :hover {
+  color: var(--c2);
+}
