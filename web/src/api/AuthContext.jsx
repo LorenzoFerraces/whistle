@@ -66,21 +66,6 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const succesHandler = (text, url) => {
-    toast.success(text, {
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-      theme: 'dark',
-      transition: Bounce,
-    });
-    window.location.href = url;
-  };
-
   const postLogin = (email, password, setSucces) => {
     setSucces(false);
     setUserLoad(false);
@@ -99,7 +84,11 @@ export const AuthProvider = ({ children }) => {
         });
       })
       .catch((error) => setError(error))
-      .finally(() => setSucces(true), setUserLoad(true));
+      .finally(
+        () => setSucces(true),
+        setUserLoad(true),
+        (window.location.href = '/tournaments'),
+      );
   };
 
   const logOut = async () => {
@@ -133,7 +122,8 @@ export const AuthProvider = ({ children }) => {
         });
       })
       .catch((error) => setError(error))
-      .finally(() => setSucces(true), setUserLoad(true));
+      .finally(() => setSucces(true), setUserLoad(true)),
+      (window.location.href = '/tournaments');
   };
 
   const getCurrentUser = () => {
@@ -210,6 +200,7 @@ export const AuthProvider = ({ children }) => {
     team2,
     goals1,
     goals2,
+    setTournament,
     setSuccess,
   ) => {
     setSuccess(false);
@@ -221,6 +212,9 @@ export const AuthProvider = ({ children }) => {
         goals1,
         goals2,
       })
+      .then((response) => {
+        setTournament(response.data);
+      })
       .catch((error) => setError(error))
       .finally(() => setSuccess(true));
   };
@@ -230,7 +224,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         userInfo,
         userLoad,
-        succesHandler,
         postLogin,
         logOut,
         postRegister,

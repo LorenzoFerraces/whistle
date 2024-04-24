@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../api/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 const CreateForm = () => {
   const [tournamentName, setTournamentName] = useState('');
@@ -9,7 +10,7 @@ const CreateForm = () => {
   const [teamName, setTeamName] = useState('');
   const [teamsNames, setTeamsNames] = useState([]);
   const [teams, setTeams] = useState([]);
-  const { setError, postTornament, succesHandler } = useContext(AuthContext);
+  const { setError, postTornament } = useContext(AuthContext);
   const [tournament, setTournament] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -113,9 +114,9 @@ const CreateForm = () => {
           </div>
           <button type="submit">Create</button>
         </form>
-        {success && tournament
-          ? succesHandler('Login Success', `/tournament/${tournament.id}`)
-          : null}
+        {success && tournament ? (
+          <Navigate to={`/tournament/${tournament.id}`} />
+        ) : null}
       </div>
     </div>
   );

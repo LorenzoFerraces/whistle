@@ -3,7 +3,7 @@ import { TeamsScores } from '../components/teamsScores/TeamsScores';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../api/AuthContext';
-import AddResultButton from '../components/buttons/addResultButtom/AddResultButton';
+import AddResultButton from '../components/buttons/AddResultButton';
 
 const Tournament = () => {
   const { tournamentId } = useParams();
@@ -27,7 +27,11 @@ const Tournament = () => {
       <Menu />
       <div className="element main">
         {tournament && success && <TeamsScores teams={tournament.teams} />}
-        <AddResultButton tournamentId={tournamentId} />
+        <AddResultButton
+          tournamentId={tournamentId}
+          teams={tournament.teams}
+          setTournament={SetTournament}
+        />
       </div>
     </>
   );

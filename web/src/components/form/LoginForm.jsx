@@ -7,8 +7,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
-  const { postLogin, userInfo, error, setError, succesHandler } =
-    useContext(AuthContext);
+  const { postLogin, setError } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,9 +57,6 @@ const LoginForm = () => {
             <button>Register</button>
           </NavLink>
         </div>
-        {userInfo.logged && error == null && success
-          ? succesHandler('Login Success', '/tournaments')
-          : null}
       </div>
     </div>
   );

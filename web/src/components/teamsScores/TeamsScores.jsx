@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import TeamScore from '../teamScore/TeamScore';
 import HeaderTeamScore from '../teamScore/HeaderTeamScore';
 import './TeamsScores.css';

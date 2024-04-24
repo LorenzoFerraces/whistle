@@ -10,8 +10,7 @@ const RegisterForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [username, setUsername] = useState('');
   const [success, setSuccess] = useState(false);
-  const { postRegister, error, setError, userInfo, succesHandler } =
-    useContext(AuthContext);
+  const { postRegister, setError } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,9 +95,6 @@ const RegisterForm = () => {
             <button>Login</button>
           </NavLink>
         </div>
-        {userInfo.logged && error == null && success
-          ? succesHandler('Register Success', '/tournaments')
-          : null}
       </div>
     </div>
   );

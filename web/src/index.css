@@ -46,6 +46,8 @@ body {
   width: 95%;
   margin: 0px auto;
   margin-top: 15px;
+  margin-bottom: 15px;
+  justify-content: space-between;
 }
 
 h3 {

@@ -49,6 +49,16 @@
   color: var(--text);
 }
 
+.simple-form form select {
+  background-color: var(--c2);
+  border: 1px solid var(--line);
+  padding: 5px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  width: 100%;
+  color: var(--text);
+}
+
 .simple-form .nav {
   margin-right: 40px;
   margin-left: 40px;
