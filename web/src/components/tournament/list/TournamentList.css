@@ -2,8 +2,3 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-
-#tournament-list .header {
-  display: flex;
-  justify-content: space-between;
-}

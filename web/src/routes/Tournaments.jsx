@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import Menu from '../components/menu/Menu';
 import TournamentList from '../components/tournament/list/TournamentList';
 import { AuthContext } from '../api/AuthContext';
+import AddTournamentButton from '../components/buttons/AddTournamentButton';
 
 const Tournaments = () => {
   const [user, setUser] = useState([]);
@@ -21,6 +22,10 @@ const Tournaments = () => {
     <>
       <Menu />
       <div className="element main">
+        <div className="header">
+          <h3>My Tournaments</h3>
+          <AddTournamentButton />
+        </div>
         {success && user.tournaments && (
           <TournamentList tournaments={user.tournaments} />
         )}

@@ -26,12 +26,15 @@ const Tournament = () => {
     <>
       <Menu />
       <div className="element main">
+        <div className="header">
+          <h3>Tournament: {tournament ? tournament.name : null}</h3>
+          <AddResultButton
+            tournamentId={tournamentId}
+            teams={tournament.teams}
+            setTournament={SetTournament}
+          />
+        </div>
         {tournament && success && <TeamsScores teams={tournament.teams} />}
-        <AddResultButton
-          tournamentId={tournamentId}
-          teams={tournament.teams}
-          setTournament={SetTournament}
-        />
       </div>
     </>
   );

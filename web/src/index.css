@@ -39,6 +39,10 @@ body {
   background-color: var(--c1);
   border-radius: 10px;
 }
+.element .header {
+  display: flex;
+  justify-content: space-between;
+}
 
 .main {
   width: 95%;
