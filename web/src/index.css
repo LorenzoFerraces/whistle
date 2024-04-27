@@ -37,8 +37,6 @@ body {
 .element {
   padding: 10px;
   background-color: var(--c1);
-  margin-top: 0;
-  margin-bottom: 10px;
   border-radius: 10px;
 }
 
@@ -47,13 +45,11 @@ body {
   margin: 0px auto;
   margin-top: 15px;
   margin-bottom: 15px;
-  justify-content: space-between;
 }
 
 h3 {
   margin-top: 0;
   margin-bottom: 5px;
-  width: 100%;
   font-size: 2rem;
   color: var(--text);
 }
