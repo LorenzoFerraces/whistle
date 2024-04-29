@@ -1,11 +1,21 @@
 import SimpleGame from './simple/SimpleGame';
 
-const GameList = ({ games }) => {
+const GameList = ({ tournamentId, games, teams, setTournament }) => {
   return (
     <div className="game-list element">
-      {games.map((game, index) => (
-        <SimpleGame game={game} key={index} />
-      ))}{' '}
+      {games.length ? (
+        games.map((game, index) => (
+          <SimpleGame
+            tournamentId={tournamentId}
+            game={game}
+            teams={teams}
+            setTournament={setTournament}
+            key={index}
+          />
+        ))
+      ) : (
+        <p>Nothing to show yet.</p>
+      )}
     </div>
   );
 };

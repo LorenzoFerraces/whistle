@@ -219,6 +219,32 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSuccess(true));
   };
 
+  const editGame = (
+    tournamentId,
+    gameId,
+    team1,
+    score1,
+    team2,
+    score2,
+    setTournament,
+    setSuccess,
+  ) => {
+    setSuccess(false);
+    setError();
+    axios
+      .put(url + `/tournament/${tournamentId}/games/${gameId}`, {
+        team1,
+        score1,
+        team2,
+        score2,
+      })
+      .then((response) => {
+        setTournament(response.data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setSuccess(true));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -232,6 +258,7 @@ export const AuthProvider = ({ children }) => {
         postTornament,
         getTournament,
         postGame,
+        editGame,
       }}
     >
       <ToastContainer />

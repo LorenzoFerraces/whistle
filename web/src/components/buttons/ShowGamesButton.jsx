@@ -2,7 +2,7 @@ import { useState } from 'react';
 import GameList from '../gameList/GameList';
 import Modal from '../modal/Modal';
 
-const ShowGamesButton = ({ tournamentId, games, setTournament }) => {
+const ShowGamesButton = ({ tournamentId, games, teams, setTournament }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
@@ -16,6 +16,7 @@ const ShowGamesButton = ({ tournamentId, games, setTournament }) => {
         <GameList
           tournamentId={tournamentId}
           games={games}
+          teams={teams}
           setTournament={setTournament}
         />
       </Modal>

@@ -37,6 +37,7 @@ const Tournament = () => {
           <ShowGamesButton
             tournamentId={tournamentId}
             games={tournament.games}
+            teams={tournament.teams}
             setTournament={SetTournament}
           />
         </div>

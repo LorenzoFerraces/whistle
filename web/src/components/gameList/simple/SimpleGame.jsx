@@ -1,7 +1,7 @@
 import './SimpleGame.css';
-import { MdEdit } from 'react-icons/md';
+import EditGameButton from './editButton/EditGameButton';
 
-const SimpleGame = ({ game }) => {
+const SimpleGame = ({ tournamentId, game, teams, setTournament }) => {
   return (
     <div className="simple-game">
       <div className="game">
@@ -14,9 +14,12 @@ const SimpleGame = ({ game }) => {
           <span className="team-name">{game.team2}</span>
         </div>
       </div>
-      <button>
-        <MdEdit size={30} color={'#db4105'} />
-      </button>
+      <EditGameButton
+        tournamentId={tournamentId}
+        game={game}
+        teams={teams}
+        setTournament={setTournament}
+      />
     </div>
   );
 };
