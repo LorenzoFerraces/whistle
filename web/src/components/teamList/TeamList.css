@@ -1,0 +1,26 @@
+.team-list {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.team-list thead th {
+  background-color: var(--c3);
+  color: #ffffff;
+}
+
+.team-list th,
+.team-list td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.team-list tbody {
+  background-color: var(--c2);
+}
+
+.team-list tbody tr {
+  border-bottom: 1px solid #dddddd;
+}

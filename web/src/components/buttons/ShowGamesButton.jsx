@@ -1,28 +1,26 @@
 import { useState } from 'react';
-import './AddButton.css';
-import GameForm from '../form/game/GameForm';
+import GameList from '../gameList/GameList';
 import Modal from '../modal/Modal';
 
-const AddResultButton = ({ tournamentId, teams, setTournament }) => {
+const ShowGamesButton = ({ tournamentId, games, setTournament }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
     <div className="add-button">
-      <button onClick={() => setModalIsOpen(true)}>Add Result</button>
+      <button onClick={() => setModalIsOpen(true)}>History</button>
       <Modal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
-        header={'ADD RESULT'}
+        header={'GAMES'}
       >
-        <GameForm
+        <GameList
           tournamentId={tournamentId}
-          teams={teams}
+          games={games}
           setTournament={setTournament}
-          close={() => setModalIsOpen(false)}
         />
       </Modal>
     </div>
   );
 };
 
-export default AddResultButton;
+export default ShowGamesButton;

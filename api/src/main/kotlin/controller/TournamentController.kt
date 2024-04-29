@@ -56,15 +56,31 @@ class TournamentController(private var system: System, private var tokenControll
         }
     }
 
-    fun postTournamentResult(context: Context){
-        tokenController.validateAndProcessBody<DraftTournamentResult>(context) { tournamentResultREQ ->
+    fun postGame(context: Context){
+        tokenController.validateAndProcessBody<DraftGame>(context) { draftGame ->
             try {
-                val idTornament = context.pathParam("id")
-                val tournament = system.addTournamentResult(idTornament, tournamentResultREQ)
+                val idTournament = context.pathParam("id")
+                val tournament = system.addGame(idTournament, draftGame)
                 context.json(TournamentDTO(tournament))
 
-            } catch (e: NotTournamentFoundException) {
-                tokenController.errorResponse(context, HttpStatus.UNAUTHORIZED, "User unauthorized")
+            } catch (e: NotTeamFoundException) {
+                tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "Team not found")
+            } catch (e: DuplicatedTeamException) {
+                tokenController.errorResponse(context, HttpStatus.UNPROCESSABLE_CONTENT, "Duplicated Team")
+            }
+        }
+    }
+
+    fun putGame(context: Context){
+        tokenController.validateAndProcessBody<DraftGame>(context) { draftGame ->
+            try {
+                val tournamentID = context.pathParam("id")
+                val gameID = context.pathParam("gameId")
+                val tournament = system.updateGame(tournamentID, gameID.toInt(), draftGame)
+                context.json(TournamentDTO(tournament))
+
+            } catch (e: NotTeamFoundException) {
+                tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "Team not found")
             } catch (e: DuplicatedTeamException) {
                 tokenController.errorResponse(context, HttpStatus.UNPROCESSABLE_CONTENT, "Duplicated Team")
             }

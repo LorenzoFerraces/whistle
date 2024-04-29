@@ -20,6 +20,8 @@ class Tournament(
     var sport: String,
     val date: String,
     var teams: List<Team>,
+    var nextGameID: Int,
+    var games: MutableList<Game>,
     val status: Boolean,
     val user: SimpleUser,
 )
@@ -29,14 +31,15 @@ class Team (
     var wins: Int = 0,
     var losses: Int = 0,
     var draws: Int = 0,
-    var goalsFavour: Int = 0,
-    var goalsAgainst: Int = 0
+    var favour: Int = 0,
+    var against: Int = 0
 )
 
-class Result (
-    val id: String,
-    val firstTeam: String,
-    val secondTeam: String,
-    val goalsFirst: Int,
-    val goalsSecond: Int
+class Game(
+    val id: Int,
+    var team1: String,
+    var score1: Int,
+    var team2: String,
+    var score2: Int,
 )
+

@@ -194,23 +194,23 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSucces(true));
   };
 
-  const postTornamentResult = (
+  const postGame = (
     tournamentId,
     team1,
+    score1,
     team2,
-    goals1,
-    goals2,
+    score2,
     setTournament,
     setSuccess,
   ) => {
     setSuccess(false);
     setError();
     axios
-      .post(url + `/tournament/${tournamentId}`, {
+      .post(url + `/tournament/${tournamentId}/games`, {
         team1,
+        score1,
         team2,
-        goals1,
-        goals2,
+        score2,
       })
       .then((response) => {
         setTournament(response.data);
@@ -231,7 +231,7 @@ export const AuthProvider = ({ children }) => {
         getUser,
         postTornament,
         getTournament,
-        postTornamentResult,
+        postGame,
       }}
     >
       <ToastContainer />

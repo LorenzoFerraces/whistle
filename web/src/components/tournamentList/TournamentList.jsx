@@ -1,5 +1,5 @@
-import SimpleTournament from './simple/SimpleTournament';
 import './TournamentList.css';
+import SimpleTournament from './simple/SimpleTournament';
 
 const TournamentList = ({ tournaments }) => {
   return (

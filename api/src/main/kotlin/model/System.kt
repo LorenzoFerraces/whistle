@@ -1,6 +1,5 @@
 package model
 
-import model.Result
 import model.gen.tournamentsGEN
 import model.gen.usersGEN
 
@@ -14,7 +13,7 @@ class System(private val dataManager: DataManager) {
         dataManager.loadData(this)
     }
 
-    //Login
+    //Users
     fun login(email: String, password: String): User {
         return users.find { it.email == email && it.password == password } ?: throw UserNotFoundException()
     }
@@ -36,14 +35,12 @@ class System(private val dataManager: DataManager) {
 
     // Tournaments
     fun addTournament(userId: String, draft: DraftTournament): Tournament {
-
         val normalizedTeams = draft.teams.map { it.lowercase() }
         if (normalizedTeams.distinct().count() != normalizedTeams.count()) {
             throw DuplicatedTeamException()
         }
 
         val user = this.getUser(userId)
-
         var teams = mutableListOf<Team>()
         draft.teams.forEach{
                 teamName -> teams.add(Team(teamName))
@@ -56,6 +53,8 @@ class System(private val dataManager: DataManager) {
             draft.sport,
             draft.date,
             teams,
+            1,
+            mutableListOf<Game>(),
             true,
             SimpleUser(user.id, user.username)
         )
@@ -80,6 +79,54 @@ class System(private val dataManager: DataManager) {
         dataManager.saveData(this)
     }
 
+    //Games
+    fun addGame(tournamentID: String, gameDraft: DraftGame): Tournament {
+        var tournament = getTournament(tournamentID)
+        val game = Game(tournament.nextGameID, gameDraft.team1, gameDraft.score1, gameDraft.team2, gameDraft.score2)
+        this.updateTeamStats(tournament, game)
+        tournament.games += game
+        tournament.nextGameID += 1
+        dataManager.saveData(this)
+        return tournament
+    }
+
+    fun updateGame(tournamentID: String, gameID: Int, gameDraft: DraftGame): Tournament {
+        var tournament = getTournament(tournamentID)
+        var game = tournament.games.find { it.id == gameID } ?: throw NotGameFoundException()
+        game.team1 = gameDraft.team1
+        game.score1 = gameDraft.score1
+        game.team2 = gameDraft.team2
+        game.score2 = gameDraft.score2
+        this.updateTeamStats(tournament, game)
+        dataManager.saveData(this)
+        return tournament
+    }
+
+    private fun updateTeamStats(tournament: Tournament, game: Game) {
+        val team1 = tournament.teams.find { it.name == game.team1 } ?: throw NotTeamFoundException()
+        val team2 = tournament.teams.find { it.name == game.team2 } ?: throw NotTeamFoundException()
+
+        when {
+            game.score1 > game.score2 -> {
+                team1?.wins = (team1?.wins ?: 0) + 1
+                team2?.losses = (team2?.losses ?: 0) + 1
+            }
+            game.score1 < game.score2 -> {
+                team1?.losses = (team1?.losses ?: 0) + 1
+                team2?.wins = (team2?.wins ?: 0) + 1
+            }
+            else -> {
+                team1?.draws = (team1?.draws ?: 0) + 1
+                team2?.draws = (team2?.draws ?: 0) + 1
+            }
+        }
+
+        team1?.favour = (team1?.favour ?: 0) + game.score1
+        team1?.against = (team1?.against ?: 0) + game.score2
+        team2?.favour = (team2?.favour ?: 0) + game.score2
+        team2?.against = (team2?.against ?: 0) + game.score1
+    }
+
     //Dev
     fun createData() {
         this.addUsers()
@@ -101,46 +148,8 @@ class System(private val dataManager: DataManager) {
                 if (availableTournaments.isNotEmpty()) {
                     val draftTournament = availableTournaments.removeAt(0)
                     addTournament(user.id, draftTournament)
-                    }
                 }
             }
         }
-
-    fun addTournamentResult(tournamentID: String, tournamentResultREQ: DraftTournamentResult): Tournament {
-        var tournament = getTournament(tournamentID)
-        var team1 = getTeamFromTournament(tournament,tournamentResultREQ.team1)
-        var team2 = getTeamFromTournament(tournament,tournamentResultREQ.team2)
-        var resultMatch = statesOfMatch(tournamentResultREQ.goals1,tournamentResultREQ.goals2)
-        updateTeamResult(team1,resultMatch[0],tournamentResultREQ.goals1,tournamentResultREQ.goals2)
-        updateTeamResult(team2,resultMatch[1],tournamentResultREQ.goals2,tournamentResultREQ.goals1)
-        dataManager.saveData(this)
-        return getTournament(tournamentID)
     }
-
-    fun getTeamFromTournament(tournament: Tournament, teamName: String): Team{
-        return tournament.teams.find { it.name == teamName } ?: throw NotTournamentFoundException()
-    }
-
-    fun statesOfMatch(goals1: Int, goals2: Int): List<String>{
-        return if (goals1 > goals2){
-                    listOf("Win","Lose")
-                }else if(goals1 < goals2){
-                    listOf("Lose","Win")
-                }else{
-                    listOf("Draw","Draw")
-                }
-    }
-
-    fun updateTeamResult(team: Team,result: String,myGoals:Int,enemyGoals:Int){
-        team.goalsFavour += myGoals
-        team.goalsAgainst += enemyGoals
-        if(result == "Win"){
-            team.wins++
-        }else if(result == "Lose"){
-            team.losses++
-        }else{
-            team.draws++
-        }
-    }
-
 }

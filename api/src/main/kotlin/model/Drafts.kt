@@ -21,9 +21,9 @@ class DraftTournament(
     val sport: String
 )
 
-class DraftTournamentResult(
+class DraftGame(
     val team1: String,
+    val score1: Int,
     val team2: String,
-    val goals1: Int,
-    val goals2: Int
+    val score2: Int,
     )

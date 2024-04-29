@@ -1,9 +1,6 @@
 package dto
 
-import model.DuplicatedTeamException
-import model.SimpleUser
-import model.Team
-import model.Tournament
+import model.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,6 +12,7 @@ class TournamentDTO() {
     lateinit var date: String
     lateinit var status: String
     lateinit var teams: List<Team>
+    lateinit var games: List<Game>
     lateinit var user: SimpleUser
 
     constructor(tournament: Tournament): this() {
@@ -25,6 +23,7 @@ class TournamentDTO() {
         this.date = tournament.date
         this.status = tournament.status.toString()
         this.teams = tournament.teams
+        this.games = tournament.games
         this.user = tournament.user
     }
 }

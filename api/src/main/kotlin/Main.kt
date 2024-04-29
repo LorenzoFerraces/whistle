@@ -20,7 +20,7 @@ class Api {
     private val tournamentController = TournamentController(service, tokenController)
 
     fun start() {
-        //service.createData()
+        service.createData()
         val app = Javalin.create { config ->
             config.http.defaultContentType = "application/json"
             config.accessManager(tokenController::validate)
@@ -51,7 +51,12 @@ class Api {
                 ApiBuilder.path("{id}") {
                     ApiBuilder.get(tournamentController::getTournament, Roles.ANYONE)
                     ApiBuilder.delete(tournamentController::deleteTournament, Roles.USER)
-                    ApiBuilder.post(tournamentController::postTournamentResult, Roles.USER)
+                    ApiBuilder.path("games") {
+                        ApiBuilder.post(tournamentController::postGame, Roles.USER)
+                        ApiBuilder.path("{gameId}") {
+                            ApiBuilder.put(tournamentController::putGame, Roles.USER)
+                        }
+                    }
                 }
             }
         }

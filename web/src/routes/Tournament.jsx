@@ -1,9 +1,10 @@
 import Menu from '../components/menu/Menu';
-import { TeamsScores } from '../components/teamsScores/TeamsScores';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../api/AuthContext';
 import AddResultButton from '../components/buttons/AddResultButton';
+import TeamList from '../components/teamList/TeamList';
+import ShowGamesButton from '../components/buttons/ShowGamesButton';
 
 const Tournament = () => {
   const { tournamentId } = useParams();
@@ -33,8 +34,13 @@ const Tournament = () => {
             teams={tournament.teams}
             setTournament={SetTournament}
           />
+          <ShowGamesButton
+            tournamentId={tournamentId}
+            games={tournament.games}
+            setTournament={SetTournament}
+          />
         </div>
-        {tournament && success && <TeamsScores teams={tournament.teams} />}
+        {tournament && success && <TeamList teams={tournament.teams} />}
       </div>
     </>
   );
