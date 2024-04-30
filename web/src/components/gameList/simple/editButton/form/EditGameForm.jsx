@@ -42,7 +42,6 @@ const EditGameForm = ({ tournamentId, game, teams, close, setTournament }) => {
           <div className="group">
             <div>TEAM 1</div>
             <select value={team1} onChange={(e) => setTeam1(e.target.value)}>
-              <option value="">Select Team</option>
               {teams.map((team) => (
                 <option key={team.name} value={team.name}>
                   {team.name}
@@ -64,7 +63,6 @@ const EditGameForm = ({ tournamentId, game, teams, close, setTournament }) => {
           <div className="group">
             <div>TEAM 2</div>
             <select value={team2} onChange={(e) => setTeam2(e.target.value)}>
-              <option value="">Select Team</option>
               {teams.map((team) => (
                 <option key={team.name} value={team.name}>
                   {team.name}
