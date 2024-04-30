@@ -92,19 +92,12 @@ class System(private val dataManager: DataManager) {
 
     fun updateGame(tournamentID: String, gameID: Int, gameDraft: DraftGame): Tournament {
         var tournament = getTournament(tournamentID)
-        var oldGame = tournament.games.find { it.id == gameID } ?: throw NotGameFoundException()
-
-        // Crear un nuevo juego con los datos actualizados
-        val newGame = Game(oldGame.id, gameDraft.team1, gameDraft.score1, gameDraft.team2, gameDraft.score2)
-
-        // Actualizar el juego en la lista de juegos del torneo
-        val index = tournament.games.indexOf(oldGame)
-        tournament.games[index] = newGame
-
-        // Llamar a la función para actualizar las estadísticas del equipo
-        this.updateStats(tournament, oldGame, newGame)
-
-        // Guardar los cambios y devolver el torneo actualizado
+        var game = tournament.games.find { it.id == gameID } ?: throw NotGameFoundException()
+        game.team1 = gameDraft.team1
+        game.score1 = gameDraft.score1
+        game.team2 = gameDraft.team2
+        game.score2 = gameDraft.score2
+        this.updateTeamStats(tournament, game)
         dataManager.saveData(this)
         return tournament
     }
@@ -132,53 +125,6 @@ class System(private val dataManager: DataManager) {
         team1?.against = (team1?.against ?: 0) + game.score2
         team2?.favour = (team2?.favour ?: 0) + game.score2
         team2?.against = (team2?.against ?: 0) + game.score1
-    }
-
-    private fun updateStats(tournament: Tournament, oldGame: Game, newGame: Game) {
-        val team1 = tournament.teams.find { it.name == oldGame.team1 } ?: throw NotTeamFoundException()
-        val team2 = tournament.teams.find { it.name == oldGame.team2 } ?: throw NotTeamFoundException()
-
-        // Restar los resultados antiguos del partido
-        when {
-            oldGame.score1 > oldGame.score2 -> {
-                team1.wins -= 1
-                team2.losses -= 1
-            }
-            oldGame.score1 < oldGame.score2 -> {
-                team1.losses -= 1
-                team2.wins -= 1
-            }
-            else -> {
-                team1.draws -= 1
-                team2.draws -= 1
-            }
-        }
-
-        team1.favour -= oldGame.score1
-        team1.against -= oldGame.score2
-        team2.favour -= oldGame.score2
-        team2.against -= oldGame.score1
-
-        // Agregar los nuevos resultados del partido
-        when {
-            newGame.score1 > newGame.score2 -> {
-                team1.wins += 1
-                team2.losses += 1
-            }
-            newGame.score1 < newGame.score2 -> {
-                team1.losses += 1
-                team2.wins += 1
-            }
-            else -> {
-                team1.draws += 1
-                team2.draws += 1
-            }
-        }
-
-        team1.favour += newGame.score1
-        team1.against += newGame.score2
-        team2.favour += newGame.score2
-        team2.against += newGame.score1
     }
 
     //Dev
