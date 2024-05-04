@@ -26,6 +26,7 @@ const SimpleTournament = ({ tournament }) => {
             <div className="date">
               <SlCalender />
               <span>{tournament.date}</span>
+              <span>{tournament.sport}</span>
               <div>
                 {tournament.status ? (
                   <div className="status">

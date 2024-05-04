@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import FilterTournamentButton from './button/FilterTournamentsButton';
 import SearchTournamentBox from './search/SearchTournamentBox';
 import { AuthContext } from '../../api/AuthContext';
@@ -11,6 +11,11 @@ const FilterTournaments = ({ userId, setTournaments }) => {
   const handleSubmit = () => {
     getUserTournamentsSearch(userId, inputSport, inputText, setTournaments);
   };
+
+  useEffect(() => {
+    handleSubmit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputSport]);
 
   return (
     <div className="search-box">
