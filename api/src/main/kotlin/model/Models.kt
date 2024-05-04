@@ -17,7 +17,7 @@ class Tournament(
     val id: String,
     var name: String,
     var description: String,
-    var sport: String,
+    var sport: Sports,
     val date: String,
     var teams: List<Team>,
     var nextGameID: Int,
@@ -42,4 +42,8 @@ class Game(
     var team2: String,
     var score2: Int,
 )
+
+enum class Sports {
+    Football, Volleyball, Handball
+}
 

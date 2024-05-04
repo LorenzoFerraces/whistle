@@ -55,19 +55,11 @@
   margin-bottom: 3px;
   width: 100%;
   color: var(--text);
+  box-sizing: border-box;
 }
 
 .simple-form .nav {
   margin-right: 40px;
   margin-left: 40px;
   text-align: right;
-}
-
-.simple-form form .form-row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.simple-form form .form-group {
-  flex: 1;
 }

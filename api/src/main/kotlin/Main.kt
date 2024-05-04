@@ -43,7 +43,13 @@ class Api {
                 }
                 ApiBuilder.path("{id}") {
                     ApiBuilder.get(userController::getUser, Roles.ANYONE)
+                    ApiBuilder.path("tournaments") {
+                        ApiBuilder.path("search") {
+                            ApiBuilder.get(userController::getUserTournamentsSearch, Roles.ANYONE)
+                        }
+                    }
                 }
+
             }
             ApiBuilder.path("tournament") {
                 ApiBuilder.get(tournamentController::getAllTournaments, Roles.ANYONE)

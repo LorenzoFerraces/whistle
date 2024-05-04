@@ -29,17 +29,19 @@ const Tournament = () => {
       <div className="element main">
         <div className="header">
           <h3>Tournament: {tournament ? tournament.name : null}</h3>
-          <AddResultButton
-            tournamentId={tournamentId}
-            teams={tournament.teams}
-            setTournament={SetTournament}
-          />
-          <ShowGamesButton
-            tournamentId={tournamentId}
-            games={tournament.games}
-            teams={tournament.teams}
-            setTournament={SetTournament}
-          />
+          <div className="buttons">
+            <AddResultButton
+              tournamentId={tournamentId}
+              teams={tournament.teams}
+              setTournament={SetTournament}
+            />
+            <ShowGamesButton
+              tournamentId={tournamentId}
+              games={tournament.games}
+              teams={tournament.teams}
+              setTournament={SetTournament}
+            />
+          </div>
         </div>
         {tournament && success && <TeamList teams={tournament.teams} />}
       </div>

@@ -22,6 +22,13 @@ const EditGameForm = ({ tournamentId, game, teams, close, setTournament }) => {
       setError('Plese add a valid score.');
       return;
     }
+    const goals1String = score1.toString();
+    const goals2String = score2.toString();
+
+    if (goals1String.includes(',') || goals2String.includes(',')) {
+      setError('Please enter integer values for goals.');
+      return;
+    }
     editGame(
       tournamentId,
       game.id,
@@ -42,7 +49,6 @@ const EditGameForm = ({ tournamentId, game, teams, close, setTournament }) => {
           <div className="group">
             <div>TEAM 1</div>
             <select value={team1} onChange={(e) => setTeam1(e.target.value)}>
-              <option value="">Select Team</option>
               {teams.map((team) => (
                 <option key={team.name} value={team.name}>
                   {team.name}
@@ -64,7 +70,6 @@ const EditGameForm = ({ tournamentId, game, teams, close, setTournament }) => {
           <div className="group">
             <div>TEAM 2</div>
             <select value={team2} onChange={(e) => setTeam2(e.target.value)}>
-              <option value="">Select Team</option>
               {teams.map((team) => (
                 <option key={team.name} value={team.name}>
                   {team.name}

@@ -27,6 +27,13 @@ const GameForm = ({ tournamentId, teams, close, setTournament }) => {
       setError('Plese add a valid score.');
       return;
     }
+    const goals1String = score1.toString();
+    const goals2String = score2.toString();
+
+    if (goals1String.includes(',') || goals2String.includes(',')) {
+      setError('Please enter integer values for goals.');
+      return;
+    }
     postGame(
       tournamentId,
       team1,

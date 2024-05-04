@@ -7,6 +7,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({ logged: false });
+  const sports = ['Football', 'Volleyball', 'Handball'];
   const [userLoad, setUserLoad] = useState(false);
   const [error, setError] = useState();
   const url = 'http://localhost:8001';
@@ -143,13 +144,14 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setUserLoad(true));
   };
 
-  const getUser = (id, setUser, setSucces) => {
+  const getUser = (id, setUser, setTournaments, setSucces) => {
     setSucces(false);
     setError();
     axios
       .get(url + `/user/${id}`)
       .then((response) => {
         setUser(response.data);
+        setTournaments(response.data.tournaments);
       })
       .catch((error) => setError(error))
       .finally(() => setSucces(true));
@@ -245,11 +247,24 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSuccess(true));
   };
 
+  const getUserTournamentsSearch = (userId, sport, name, setTournaments) => {
+    setError();
+    axios
+      .get(
+        url + `/user/${userId}/tournaments/search?sport=${sport}&name=${name}`,
+      )
+      .then((response) => {
+        setTournaments(response.data);
+      })
+      .catch((error) => setError(error));
+  };
+
   return (
     <AuthContext.Provider
       value={{
         userInfo,
         userLoad,
+        sports,
         postLogin,
         logOut,
         postRegister,
@@ -259,6 +274,7 @@ export const AuthProvider = ({ children }) => {
         getTournament,
         postGame,
         editGame,
+        getUserTournamentsSearch,
       }}
     >
       <ToastContainer />

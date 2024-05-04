@@ -10,7 +10,7 @@ const CreateForm = () => {
   const [teamName, setTeamName] = useState('');
   const [teamsNames, setTeamsNames] = useState([]);
   const [teams, setTeams] = useState([]);
-  const { setError, postTornament } = useContext(AuthContext);
+  const { setError, postTornament, sports } = useContext(AuthContext);
   const [tournament, setTournament] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -74,11 +74,14 @@ const CreateForm = () => {
           </div>
           <div>
             <div>SPORT</div>
-            <input
-              type="text"
-              value={sport}
-              onChange={(e) => setSport(e.target.value)}
-            />
+            <select value={sport} onChange={(e) => setSport(e.target.value)}>
+              <option value="">Select Sport</option>
+              {sports.map((sportOption, index) => (
+                <option key={index} value={sportOption}>
+                  {sportOption.charAt(0).toUpperCase() + sportOption.slice(1)}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <div>DESCRIPTION</div>

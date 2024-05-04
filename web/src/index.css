@@ -45,6 +45,11 @@ body {
   justify-content: space-between;
 }
 
+.element .header .buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .main {
   width: 95%;
   margin: 0px auto;

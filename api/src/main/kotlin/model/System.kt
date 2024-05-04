@@ -1,7 +1,9 @@
 package model
 
+import model.gen.teamsGEN
 import model.gen.tournamentsGEN
 import model.gen.usersGEN
+import kotlin.random.Random
 
 class System(private val dataManager: DataManager) {
     var users = mutableListOf<User>()
@@ -42,15 +44,21 @@ class System(private val dataManager: DataManager) {
 
         val user = this.getUser(userId)
         var teams = mutableListOf<Team>()
-        draft.teams.forEach{
-                teamName -> teams.add(Team(teamName))
+        draft.teams.forEach { teamName ->
+            teams.add(Team(teamName))
+        }
+
+        val sportEnum = try {
+            Sports.valueOf(draft.sport)
+        } catch (e: IllegalArgumentException) {
+            throw InvalidSportException()
         }
 
         val tournament = Tournament(
             idGenerator.getTournamentId(),
             draft.name,
             draft.description,
-            draft.sport,
+            sportEnum,
             draft.date,
             teams,
             1,
@@ -71,7 +79,7 @@ class System(private val dataManager: DataManager) {
     }
 
     fun removeTournament(tournamentId: String, userId: String) {
-        val tournament = tournaments.find{ it.id == tournamentId } ?: throw NotTournamentFoundException()
+        val tournament = tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
         if (tournament.user.id != userId) throw UserException("You are not authorized to modify this tournament")
         val user = this.getUser(userId)
         tournaments.remove(tournament)
@@ -92,14 +100,68 @@ class System(private val dataManager: DataManager) {
 
     fun updateGame(tournamentID: String, gameID: Int, gameDraft: DraftGame): Tournament {
         var tournament = getTournament(tournamentID)
-        var game = tournament.games.find { it.id == gameID } ?: throw NotGameFoundException()
-        game.team1 = gameDraft.team1
-        game.score1 = gameDraft.score1
-        game.team2 = gameDraft.team2
-        game.score2 = gameDraft.score2
-        this.updateTeamStats(tournament, game)
+        var oldGame = tournament.games.find { it.id == gameID } ?: throw NotGameFoundException()
+
+        // Crear un nuevo juego con los datos actualizados
+        val newGame = Game(oldGame.id, gameDraft.team1, gameDraft.score1, gameDraft.team2, gameDraft.score2)
+
+        // Actualizar el juego en la lista de juegos del torneo
+        val index = tournament.games.indexOf(oldGame)
+        tournament.games[index] = newGame
+
+        // Llamar a la función para actualizar las estadísticas del equipo
+        this.updateStats(tournament, oldGame, newGame)
+
+        // Guardar los cambios y devolver el torneo actualizado
         dataManager.saveData(this)
         return tournament
+    }
+
+    private fun updateStats(tournament: Tournament, oldGame: Game, newGame: Game) {
+        val team1 = tournament.teams.find { it.name == oldGame.team1 } ?: throw NotTeamFoundException()
+        val team2 = tournament.teams.find { it.name == oldGame.team2 } ?: throw NotTeamFoundException()
+
+        // Restar los resultados antiguos del partido
+        when {
+            oldGame.score1 > oldGame.score2 -> {
+                team1.wins -= 1
+                team2.losses -= 1
+            }
+            oldGame.score1 < oldGame.score2 -> {
+                team1.losses -= 1
+                team2.wins -= 1
+            }
+            else -> {
+                team1.draws -= 1
+                team2.draws -= 1
+            }
+        }
+
+        team1.favour -= oldGame.score1
+        team1.against -= oldGame.score2
+        team2.favour -= oldGame.score2
+        team2.against -= oldGame.score1
+
+        // Agregar los nuevos resultados del partido
+        when {
+            newGame.score1 > newGame.score2 -> {
+                team1.wins += 1
+                team2.losses += 1
+            }
+            newGame.score1 < newGame.score2 -> {
+                team1.losses += 1
+                team2.wins += 1
+            }
+            else -> {
+                team1.draws += 1
+                team2.draws += 1
+            }
+        }
+
+        team1.favour += newGame.score1
+        team1.against += newGame.score2
+        team2.favour += newGame.score2
+        team2.against += newGame.score1
     }
 
     private fun updateTeamStats(tournament: Tournament, game: Game) {
@@ -111,10 +173,12 @@ class System(private val dataManager: DataManager) {
                 team1?.wins = (team1?.wins ?: 0) + 1
                 team2?.losses = (team2?.losses ?: 0) + 1
             }
+
             game.score1 < game.score2 -> {
                 team1?.losses = (team1?.losses ?: 0) + 1
                 team2?.wins = (team2?.wins ?: 0) + 1
             }
+
             else -> {
                 team1?.draws = (team1?.draws ?: 0) + 1
                 team2?.draws = (team2?.draws ?: 0) + 1
@@ -134,22 +198,67 @@ class System(private val dataManager: DataManager) {
     }
 
     private fun addUsers() {
-        for (draftUser in usersGEN){
+        for (draftUser in usersGEN) {
             this.addUser(draftUser)
         }
     }
 
     private fun addTournaments() {
         val availableTournaments = tournamentsGEN.toMutableList()
-        for (user in this.users){
+        for (user in this.users) {
             val numTournamentsToAdd = (2..6).random()
             availableTournaments.shuffle()
             for (i in 0 until numTournamentsToAdd) {
                 if (availableTournaments.isNotEmpty()) {
-                    val draftTournament = availableTournaments.removeAt(0)
+                    val tournamentGen = availableTournaments.removeAt(0)
+                    val name = tournamentGen.first
+                    val description = tournamentGen.second
+                    val draftTournament = generateUniqueDraftTournament(name, description)
                     addTournament(user.id, draftTournament)
                 }
             }
         }
+    }
+
+    private fun generateUniqueDraftTournament(name: String, description: String): DraftTournament {
+        val date = generateRandomDate()
+        val teams = generateRandomTeams()
+        val sport = Sports.values().random().name
+        print(sport)
+        return DraftTournament(name, description, date, teams, sport)
+    }
+
+    private fun generateRandomDate(): String {
+        val random = java.util.Random()
+        val year = 2024
+        val month = random.nextInt(12) + 1
+        val day = random.nextInt(28) + 1
+        return "$year-$month-$day"
+    }
+
+    private fun generateRandomTeams(): List<String> {
+        val random = java.util.Random()
+        val numTeams = random.nextInt(teamsGEN.size) + 2
+        val uniqueTeams = teamsGEN.distinct()
+        val shuffledTeams = uniqueTeams.shuffled()
+        return shuffledTeams.take(numTeams)
+    }
+
+    fun searchTournamentsOfUser(userId: String, sport: String?, name: String?): List<Tournament> {
+        val user = getUser(userId)
+        val tournaments = user.tournaments
+
+        val filteredBySport = if (!sport.isNullOrBlank()) {
+            tournaments.filter { it.sport.name == sport }
+        } else {
+            tournaments
+        }
+
+        // Filtrar por nombre si se proporciona un nombre
+        val filteredByName = name?.let { nameToSearch ->
+            filteredBySport.filter { it.name.contains(nameToSearch, ignoreCase = true) }
+        } ?: filteredBySport // Si no se proporciona un nombre, se devuelve la lista sin filtrar
+
+        return filteredByName
     }
 }
