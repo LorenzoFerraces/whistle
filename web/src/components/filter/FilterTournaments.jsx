@@ -23,7 +23,6 @@ const FilterTournaments = ({ userId, setTournaments }) => {
         sports={sports}
         inputSport={inputSport}
         setInputSport={setInputSport}
-        handleSubmit={handleSubmit}
       />
       <SearchTournamentBox
         setInputText={setInputText}

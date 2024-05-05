@@ -1,12 +1,6 @@
-const FilterTournamentButton = ({
-  sports,
-  inputSport,
-  setInputSport,
-  handleSubmit,
-}) => {
+const FilterTournamentButton = ({ sports, inputSport, setInputSport }) => {
   const handleChange = (e) => {
     setInputSport(e.target.value);
-    handleSubmit();
   };
 
   return (

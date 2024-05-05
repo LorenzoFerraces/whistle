@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../api/AuthContext';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Form.css';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [success, setSuccess] = useState(false);
   const { postLogin, setError } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const LoginForm = () => {
       setError('Please enter a valid email address.');
       return;
     }
-    postLogin(email, password, setSuccess);
+    postLogin(email, password, navigate);
     setEmail('');
     setPassword('');
   };

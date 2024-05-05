@@ -26,7 +26,7 @@ const Tournaments = () => {
       <div className="element main">
         <div className="header">
           <h3>My Tournaments</h3>
-          {user ? (
+          {user && user.id ? (
             <FilterTournaments
               userId={user.id}
               setTournaments={setTournaments}

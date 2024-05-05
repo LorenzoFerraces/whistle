@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Form.css';
 import { AuthContext } from '../../api/AuthContext';
 
@@ -9,8 +9,8 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [success, setSuccess] = useState(false);
   const { postRegister, setError } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const RegisterForm = () => {
       setError('Please enter a valid email address.');
       return;
     }
-    postRegister(email, password, username, setSuccess);
+    postRegister(email, password, username, navigate);
     setEmail('');
     setRepeatEmail('');
     setPassword('');

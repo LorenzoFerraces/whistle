@@ -67,8 +67,7 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const postLogin = (email, password, setSucces) => {
-    setSucces(false);
+  const postLogin = (email, password, navigate) => {
     setUserLoad(false);
     setError();
     axios
@@ -83,13 +82,10 @@ export const AuthProvider = ({ children }) => {
           id: data.id,
           name: data.name,
         });
+        navigate('/tournaments');
       })
       .catch((error) => setError(error))
-      .finally(
-        () => setSucces(true),
-        setUserLoad(true),
-        (window.location.href = '/tournaments'),
-      );
+      .finally(() => setUserLoad(true));
   };
 
   const logOut = async () => {
@@ -102,8 +98,7 @@ export const AuthProvider = ({ children }) => {
     window.location.href = '/login';
   };
 
-  const postRegister = (email, password, username, setSucces) => {
-    setSucces(false);
+  const postRegister = (email, password, username, navigate) => {
     setError();
     axios
       .post(url + '/register', {
@@ -121,10 +116,10 @@ export const AuthProvider = ({ children }) => {
           id: data.id,
           name: data.name,
         });
+        navigate('/tournaments');
       })
       .catch((error) => setError(error))
-      .finally(() => setSucces(true), setUserLoad(true)),
-      (window.location.href = '/tournaments');
+      .finally(() => setUserLoad(true));
   };
 
   const getCurrentUser = () => {
