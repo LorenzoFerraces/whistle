@@ -5,7 +5,8 @@
   height: 40px;
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid ;
+  border-color: white;
   border-radius: 8px;
   align-items: center;
   cursor: pointer;
@@ -28,11 +29,6 @@
 /* Optional: Style the dropdown options */
 .sport-filter option {
   padding: 8px;
-}
-
-/* Highlight styles */
-.sport-filter {
-  border-color: var(--c3); /* Highlight border color */
 }
 
 .sport-filter:focus {
