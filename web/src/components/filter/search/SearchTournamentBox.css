@@ -1,0 +1,37 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  width: 300px; /* Adjust width as needed */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--c3); /* Highlight border color on focus */
+}
+
+.search-bar button {
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.search-bar button:focus {
+  outline: none;
+}
+
+/* Highlight styles */
+.search-bar input:focus {
+  border-color: var(--c3); /* Highlight border color on focus */
+}
+
+.search-bar button:hover svg {
+  color: var(--c3); /* Highlight icon color on hover */
+}

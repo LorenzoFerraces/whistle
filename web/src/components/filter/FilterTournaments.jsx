@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import FilterTournamentButton from './button/FilterTournamentsButton';
 import SearchTournamentBox from './search/SearchTournamentBox';
 import { AuthContext } from '../../api/AuthContext';
+import './FilterTournament.css'
 
 const FilterTournaments = ({ userId, setTournaments }) => {
   const [inputSport, setInputSport] = useState('');
@@ -19,15 +20,15 @@ const FilterTournaments = ({ userId, setTournaments }) => {
 
   return (
     <div className="search-box">
-      <FilterTournamentButton
-        sports={sports}
-        inputSport={inputSport}
-        setInputSport={setInputSport}
-      />
       <SearchTournamentBox
         setInputText={setInputText}
         inputText={inputText}
         handleSubmit={handleSubmit}
+      />
+      <FilterTournamentButton
+        sports={sports}
+        inputSport={inputSport}
+        setInputSport={setInputSport}
       />
     </div>
   );
