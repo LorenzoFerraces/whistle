@@ -57,12 +57,15 @@ class Api {
                 ApiBuilder.path("{id}") {
                     ApiBuilder.get(tournamentController::getTournament, Roles.ANYONE)
                     ApiBuilder.delete(tournamentController::deleteTournament, Roles.USER)
-                    ApiBuilder.path("games") {
-                        ApiBuilder.post(tournamentController::postGame, Roles.USER)
-                        ApiBuilder.path("{gameId}") {
-                            ApiBuilder.put(tournamentController::putGame, Roles.USER)
-                        }
+                    ApiBuilder.path("status") {
+                        ApiBuilder.post(tournamentController::closeGame, Roles.USER)
                     }
+                    ApiBuilder.path("games") {
+                         ApiBuilder.post(tournamentController::postGame, Roles.USER)
+                         ApiBuilder.path("{gameId}") {
+                                ApiBuilder.put(tournamentController::putGame, Roles.USER)
+                            }
+                        }
                 }
             }
         }

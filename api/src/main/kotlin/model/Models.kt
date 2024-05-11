@@ -22,7 +22,7 @@ class Tournament(
     var teams: List<Team>,
     var nextGameID: Int,
     var games: MutableList<Game>,
-    val status: Boolean,
+    var status: Boolean,
     val user: SimpleUser,
 )
 

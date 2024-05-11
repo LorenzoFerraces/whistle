@@ -56,6 +56,20 @@ class TournamentController(private var system: System, private var tokenControll
         }
     }
 
+    fun closeGame(context: Context) {
+        try {
+            val id = context.pathParam("id")
+            var userID = tokenController.tokenToUserId(context)
+            val tournament = system.closeGame(id, userID)
+            context.json(TournamentDTO(tournament))
+            return
+        }catch (e : NotTournamentFoundException) {
+            tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "Tournament not found")
+        }catch (e : UserException) {
+            tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "Tournament not found")
+        }
+    }
+
     fun postGame(context: Context){
         tokenController.validateAndProcessBody<DraftGame>(context) { draftGame ->
             try {
@@ -86,4 +100,6 @@ class TournamentController(private var system: System, private var tokenControll
             }
         }
     }
+
+
 }
