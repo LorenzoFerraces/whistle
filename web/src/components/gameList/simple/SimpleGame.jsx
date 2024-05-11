@@ -1,7 +1,13 @@
 import './SimpleGame.css';
 import EditGameButton from './editButton/EditGameButton';
 
-const SimpleGame = ({ tournamentId, game, teams, setTournament }) => {
+const SimpleGame = ({
+  tournamentId,
+  game,
+  teams,
+  setTournament,
+  tournamentStatus,
+}) => {
   return (
     <div className="simple-game">
       <div className="game">
@@ -14,12 +20,14 @@ const SimpleGame = ({ tournamentId, game, teams, setTournament }) => {
           <span className="team-name">{game.team2}</span>
         </div>
       </div>
-      <EditGameButton
-        tournamentId={tournamentId}
-        game={game}
-        teams={teams}
-        setTournament={setTournament}
-      />
+      {tournamentStatus && (
+        <EditGameButton
+          tournamentId={tournamentId}
+          game={game}
+          teams={teams}
+          setTournament={setTournament}
+        />
+      )}
     </div>
   );
 };
