@@ -1,7 +1,8 @@
+import React from 'react';
 import './TeamList.css';
 import TeamScore from './score/TeamScore';
 
-const TeamList = ({ teams }) => {
+const TeamList = ({ teams, isOpen }) => {
   return (
     <table className="team-list">
       <thead>
@@ -17,7 +18,13 @@ const TeamList = ({ teams }) => {
       <tbody>
         {teams &&
           teams.length > 0 &&
-          teams.map((team) => <TeamScore key={team.name} team={team} />)}
+          teams.map((team, index) => (
+            <TeamScore
+              key={team.name}
+              team={team}
+              highlightFirstRow={!isOpen && index === 0}
+            />
+          ))}
       </tbody>
     </table>
   );

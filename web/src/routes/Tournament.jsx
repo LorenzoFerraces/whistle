@@ -63,7 +63,9 @@ const Tournament = () => {
             )}
           </div>
         </div>
-        {tournament && success && <TeamList teams={tournament.teams} />}
+        {tournament && success && (
+          <TeamList teams={tournament.teams} isOpen={isOpen} />
+        )}
       </div>
     </>
   );

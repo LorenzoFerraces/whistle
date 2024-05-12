@@ -3,3 +3,7 @@
   padding: 10px;
   border: 1px solid #ccc;
 }
+
+.highlighted-row {
+  background-color: rgb(4, 71, 4);
+}

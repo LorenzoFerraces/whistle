@@ -1,8 +1,9 @@
+import React from 'react';
 import './TeamScore.css';
 
-const TeamScore = ({ team }) => {
+const TeamScore = ({ team, highlightFirstRow }) => {
   return (
-    <tr>
+    <tr className={highlightFirstRow ? 'highlighted-row' : ''}>
       <td>{team.name}</td>
       <td>{team.wins * 2 + team.draws}</td>
       <td>{team.wins}</td>
