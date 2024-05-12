@@ -33,7 +33,15 @@ class Team (
     var draws: Int = 0,
     var favour: Int = 0,
     var against: Int = 0
-)
+) {
+    fun puntos(): Int {
+        return (wins * 2) + draws
+    }
+
+    fun diferenciaGoles(): Int {
+        return this.favour - this.against
+    }
+}
 
 class Game(
     val id: Int,
