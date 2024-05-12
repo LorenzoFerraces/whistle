@@ -88,6 +88,15 @@ class System(private val dataManager: DataManager) {
         dataManager.saveData(this)
     }
 
+    fun closeGame(tournamentId: String, userId: String): Tournament {
+        val tournament = tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
+        if (tournament.user.id != userId) throw UserException("You are not authorized to modify this tournament")
+        tournament.status = false
+        dataManager.saveData(this)
+        return tournament
+    }
+
+
     //Games
     fun addGame(tournamentID: String, gameDraft: DraftGame): Tournament {
         var tournament = getTournament(tournamentID)
@@ -264,4 +273,6 @@ class System(private val dataManager: DataManager) {
 
         return filteredByName
     }
+
+
 }

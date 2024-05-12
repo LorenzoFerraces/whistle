@@ -1,6 +1,12 @@
 import SimpleGame from './simple/SimpleGame';
 
-const GameList = ({ tournamentId, games, teams, setTournament }) => {
+const GameList = ({
+  tournamentId,
+  games,
+  teams,
+  setTournament,
+  tournamentStatus,
+}) => {
   return (
     <div className="game-list element">
       {games.length ? (
@@ -11,6 +17,7 @@ const GameList = ({ tournamentId, games, teams, setTournament }) => {
             teams={teams}
             setTournament={setTournament}
             key={index}
+            tournamentStatus={tournamentStatus}
           />
         ))
       ) : (

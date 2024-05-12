@@ -242,6 +242,16 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSuccess(true));
   };
 
+  const closeTournament = (tournamentId, setTournaments) => {
+    setError();
+    axios
+      .post(url + `/tournament/${tournamentId}/status`)
+      .then((response) => {
+        setTournaments(response.data);
+      })
+      .catch((error) => setError(error));
+  };
+
   const getUserTournamentsSearch = (userId, sport, name, setTournaments) => {
     setError();
     axios
@@ -270,6 +280,7 @@ export const AuthProvider = ({ children }) => {
         postGame,
         editGame,
         getUserTournamentsSearch,
+        closeTournament,
       }}
     >
       <ToastContainer />
