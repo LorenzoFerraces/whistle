@@ -147,6 +147,7 @@ export const AuthProvider = ({ children }) => {
       .then((response) => {
         setUser(response.data);
         setTournaments(response.data.tournaments);
+        console.log(response.data.tournaments);
       })
       .catch((error) => setError(error))
       .finally(() => setSucces(true));
@@ -179,13 +180,14 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSucces(true));
   };
 
-  const getTournament = (id, setTournament, setSucces) => {
+  const getTournament = (id, setTournament, setSucces, setIsOpen) => {
     setSucces(false);
     setError();
     axios
       .get(url + `/tournament/${id}`)
       .then((response) => {
         setTournament(response.data);
+        setIsOpen(response.data.status === 'true');
       })
       .catch((error) => setError(error))
       .finally(() => setSucces(true));
@@ -242,12 +244,13 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSuccess(true));
   };
 
-  const closeTournament = (tournamentId, setTournaments) => {
+  const closeTournament = (tournamentId, setTournament, setIsOpen) => {
     setError();
     axios
       .post(url + `/tournament/${tournamentId}/status`)
       .then((response) => {
-        setTournaments(response.data);
+        setTournament(response.data);
+        setIsOpen(response.data.status === 'true');
       })
       .catch((error) => setError(error));
   };

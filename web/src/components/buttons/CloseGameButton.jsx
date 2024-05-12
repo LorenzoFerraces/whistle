@@ -2,12 +2,12 @@ import { useContext, useState } from 'react';
 import Modal from '../modal/Modal';
 import { AuthContext } from '../../api/AuthContext';
 
-const CloseGameButton = ({ tournamentId, setTournament }) => {
+const CloseGameButton = ({ tournamentId, setTournament, setIsOpen }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { closeTournament } = useContext(AuthContext);
 
   const handlerCloseGame = () => {
-    closeTournament(tournamentId, setTournament);
+    closeTournament(tournamentId, setTournament, setIsOpen);
     setModalIsOpen(false);
   };
 

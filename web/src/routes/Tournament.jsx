@@ -11,22 +11,25 @@ const Tournament = () => {
   const { tournamentId } = useParams();
   const [tournament, setTournament] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const { getTournament } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       tournamentId &&
-        (await getTournament(tournamentId, setTournament, setSuccess));
+        (await getTournament(
+          tournamentId,
+          setTournament,
+          setSuccess,
+          setIsOpen,
+        ));
     };
     fetchData();
-  }, [tournamentId, getTournament]);
+  }, [tournamentId, getTournament, isOpen]);
 
   if (!tournament) {
     return <p>Loading...</p>;
   }
-
-  console.log(tournament);
-  console.log(tournament.status);
 
   return (
     <>
@@ -35,7 +38,7 @@ const Tournament = () => {
         <div className="header">
           <h3>Tournament: {tournament ? tournament.name : null}</h3>
           <div className="buttons">
-            {tournament.status && (
+            {isOpen && (
               <AddResultButton
                 tournamentId={tournamentId}
                 teams={tournament.teams}
@@ -48,13 +51,14 @@ const Tournament = () => {
               games={tournament.games}
               teams={tournament.teams}
               setTournament={setTournament}
-              tournamentStatus={tournament.status}
+              tournamentStatus={isOpen}
             />
 
-            {tournament.status && (
+            {isOpen && (
               <CloseGameButton
                 tournamentId={tournamentId}
                 setTournament={setTournament}
+                setIsOpen={setIsOpen}
               />
             )}
           </div>
