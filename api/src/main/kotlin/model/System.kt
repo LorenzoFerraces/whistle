@@ -9,6 +9,7 @@ class System(private val dataManager: DataManager) {
     var users = mutableListOf<User>()
     var tournaments = mutableListOf<Tournament>()
     private val idGenerator = IdGenerator(dataManager)
+    private val teamComparator = (compareBy(Team::puntos).then(compareBy(Team::diferenciaGoles))).reversed()
 
     //Load
     init {
@@ -92,6 +93,7 @@ class System(private val dataManager: DataManager) {
         var tournament = getTournament(tournamentID)
         val game = Game(tournament.nextGameID, gameDraft.team1, gameDraft.score1, gameDraft.team2, gameDraft.score2)
         this.updateTeamStats(tournament, game)
+        tournament.teams = tournament.teams.sortedWith(teamComparator)
         tournament.games += game
         tournament.nextGameID += 1
         dataManager.saveData(this)
@@ -111,6 +113,7 @@ class System(private val dataManager: DataManager) {
 
         // Llamar a la función para actualizar las estadísticas del equipo
         this.updateStats(tournament, oldGame, newGame)
+        tournament.teams = tournament.teams.sortedWith(teamComparator)
 
         // Guardar los cambios y devolver el torneo actualizado
         dataManager.saveData(this)
