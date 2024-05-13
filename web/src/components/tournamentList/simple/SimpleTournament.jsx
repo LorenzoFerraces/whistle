@@ -7,8 +7,8 @@ const SimpleTournament = ({ tournament }) => {
   return (
     <div className="simple-tournament">
       <div className="image">
-        {tournament.image ? (
-          <img src={tournament.image}></img>
+        {tournament.imageURL ? (
+          <img src={tournament.imageURL}></img>
         ) : (
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"

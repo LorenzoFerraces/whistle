@@ -3,7 +3,6 @@ package model
 import model.gen.teamsGEN
 import model.gen.tournamentsGEN
 import model.gen.usersGEN
-import kotlin.random.Random
 
 class System(private val dataManager: DataManager) {
     var users = mutableListOf<User>()
@@ -54,6 +53,8 @@ class System(private val dataManager: DataManager) {
         } catch (e: IllegalArgumentException) {
             throw InvalidSportException()
         }
+        val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
+        val imageUrl = if (draft.imageURL.isBlank()) defaultImage else draft.imageURL
 
         val tournament = Tournament(
             idGenerator.getTournamentId(),
@@ -65,7 +66,8 @@ class System(private val dataManager: DataManager) {
             1,
             mutableListOf<Game>(),
             true,
-            SimpleUser(user.id, user.username)
+            SimpleUser(user.id, user.username),
+            imageUrl
         )
         tournaments.add(tournament)
         user.tournaments.add(tournament)
@@ -216,6 +218,7 @@ class System(private val dataManager: DataManager) {
     }
 
     private fun addTournaments() {
+        val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
         val availableTournaments = tournamentsGEN.toMutableList()
         for (user in this.users) {
             val numTournamentsToAdd = (2..6).random()
@@ -225,19 +228,19 @@ class System(private val dataManager: DataManager) {
                     val tournamentGen = availableTournaments.removeAt(0)
                     val name = tournamentGen.first
                     val description = tournamentGen.second
-                    val draftTournament = generateUniqueDraftTournament(name, description)
+                    val draftTournament = generateUniqueDraftTournament(name, description, defaultImage)
                     addTournament(user.id, draftTournament)
                 }
             }
         }
     }
 
-    private fun generateUniqueDraftTournament(name: String, description: String): DraftTournament {
+    private fun generateUniqueDraftTournament(name: String, description: String, imageUrl: String): DraftTournament {
         val date = generateRandomDate()
         val teams = generateRandomTeams()
         val sport = Sports.values().random().name
         print(sport)
-        return DraftTournament(name, description, date, teams, sport)
+        return DraftTournament(name, description, date, teams, sport, imageUrl)
     }
 
     private fun generateRandomDate(): String {

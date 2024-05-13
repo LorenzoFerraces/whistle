@@ -2,6 +2,23 @@ import { useState, useContext } from 'react';
 import { AuthContext } from '../../api/AuthContext';
 import { Navigate } from 'react-router-dom';
 
+function checkIfImageExists(url, callback) {
+  const img = new Image();
+  img.src = url;
+  
+  if (img.complete) {
+    callback(true);
+  } else {
+    img.onload = () => {
+      callback(true);
+    };
+    
+    img.onerror = () => {
+      callback(false);
+    };
+  }
+}
+
 const CreateForm = () => {
   const [tournamentName, setTournamentName] = useState('');
   const [sport, setSport] = useState('');
@@ -10,7 +27,7 @@ const CreateForm = () => {
   const [teamName, setTeamName] = useState('');
   const [teamsNames, setTeamsNames] = useState([]);
   const [teams, setTeams] = useState([]);
-  const [tournamentUrlImage, setTournamentUrlImage] = useState('');
+  const [imageURL, setimageURL] = useState('');
   const { setError, postTornament, sports } = useContext(AuthContext);
   const [tournament, setTournament] = useState('');
   const [success, setSuccess] = useState(false);
@@ -18,6 +35,11 @@ const CreateForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    if (!imageURL || imageURL === '') {
+      setimageURL("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s")
+    }
+
     if (!tournamentName || !sport || !description || !selectedDate) {
       setError('Please fill out all fields.');
       return;
@@ -27,13 +49,14 @@ const CreateForm = () => {
       return;
     }
 
+
     postTornament(
       tournamentName,
       description,
       selectedDate,
       teamsNames,
       sport,
-      tournamentUrlImage,
+      imageURL,
       setTournament,
       setSuccess,
     );
@@ -50,12 +73,13 @@ const CreateForm = () => {
   };
 
   const handleImageUrlChange = (e) => {
-    const isValidUrl = true; // Hacer check si es una URL valida
-    if (isValidUrl) {
-      setTournamentUrlImage(e.target.value);
-    } else {
-      setError('The image url is invalid, choose another one');
-    }
+    checkIfImageExists(e.target.value, (isValidUrl) => { 
+      if (isValidUrl) {
+        setimageURL(e.target.value);
+      } else {
+        setError('The image url is invalid, choose another one');
+      }
+    });
   };
 
   const addTeam = () => {
@@ -131,7 +155,7 @@ const CreateForm = () => {
             <div>IMAGEN URL</div>
             <input
               type="text"
-              value={tournamentUrlImage}
+              value={imageURL}
               onChange={handleImageUrlChange}
             />
           </div>

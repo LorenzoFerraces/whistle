@@ -159,12 +159,15 @@ export const AuthProvider = ({ children }) => {
     date,
     teams,
     sport,
-    tournamentUrlImage,
+    imageURL,
     setTournament,
     setSucces,
   ) => {
     setSucces(false);
     setError();
+    if (!imageURL || imageURL === '') {
+      imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
+    }
     axios
       .post(url + '/tournament', {
         name,
@@ -172,7 +175,7 @@ export const AuthProvider = ({ children }) => {
         date,
         teams,
         sport,
-        // tournamentUrlImage
+        imageURL
       })
       .then((response) => {
         const data = response.data;

@@ -26,6 +26,6 @@ class TournamentDTO() {
         this.teams = tournament.teams
         this.games = tournament.games
         this.user = tournament.user
-        this.imageURL=  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s" //tournament.imageURL
+        this.imageURL= tournament.imageURL
     }
 }
