@@ -24,6 +24,7 @@ class Tournament(
     var games: MutableList<Game>,
     var status: Boolean,
     val user: SimpleUser,
+    var imageURL: String,
 )
 
 class Team (

@@ -10,6 +10,7 @@ const CreateForm = () => {
   const [teamName, setTeamName] = useState('');
   const [teamsNames, setTeamsNames] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [tournamentUrlImage, setTournamentUrlImage] = useState('');
   const { setError, postTornament, sports } = useContext(AuthContext);
   const [tournament, setTournament] = useState('');
   const [success, setSuccess] = useState(false);
@@ -25,12 +26,14 @@ const CreateForm = () => {
       setError('Please add at least 2 teams.');
       return;
     }
+
     postTornament(
       tournamentName,
       description,
       selectedDate,
       teamsNames,
       sport,
+      tournamentUrlImage,
       setTournament,
       setSuccess,
     );
@@ -38,11 +41,20 @@ const CreateForm = () => {
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
-    const today = new Date().toISOString().split('T')[0]; // Obtiene la fecha actual en formato YYYY-MM-DD
+    const today = new Date().toISOString().split('T')[0];
     if (selectedDate < today) {
       setError('Please select a date equal to or after today.');
     } else {
       setSelectedDate(selectedDate);
+    }
+  };
+
+  const handleImageUrlChange = (e) => {
+    const isValidUrl = true; // Hacer check si es una URL valida
+    if (isValidUrl) {
+      setTournamentUrlImage(e.target.value);
+    } else {
+      setError('The image url is invalid, choose another one');
     }
   };
 
@@ -115,6 +127,15 @@ const CreateForm = () => {
               ))}
             </ul>
           </div>
+          <div>
+            <div>IMAGEN URL</div>
+            <input
+              type="text"
+              value={tournamentUrlImage}
+              onChange={handleImageUrlChange}
+            />
+          </div>
+
           <button type="submit">Create</button>
         </form>
         {success && tournament ? (

@@ -14,6 +14,7 @@ class TournamentDTO() {
     lateinit var teams: List<Team>
     lateinit var games: List<Game>
     lateinit var user: SimpleUser
+    lateinit var imageURL: String
 
     constructor(tournament: Tournament): this() {
         this.id = tournament.id
@@ -25,5 +26,6 @@ class TournamentDTO() {
         this.teams = tournament.teams
         this.games = tournament.games
         this.user = tournament.user
+        this.imageURL=  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s" //tournament.imageURL
     }
 }
