@@ -10,7 +10,7 @@ const Menu = () => {
     <header id="main-menu">
       <NavLink to="/">
         <div className="left">
-          <span></span>
+          <img src="https://cdn-icons-png.freepik.com/512/7953/7953066.png"></img>
         </div>
       </NavLink>
       <div className="center">
