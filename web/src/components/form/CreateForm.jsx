@@ -2,23 +2,6 @@ import { useState, useContext } from 'react';
 import { AuthContext } from '../../api/AuthContext';
 import { Navigate } from 'react-router-dom';
 
-function checkIfImageExists(url, callback) {
-  const img = new Image();
-  img.src = url;
-  
-  if (img.complete) {
-    callback(true);
-  } else {
-    img.onload = () => {
-      callback(true);
-    };
-    
-    img.onerror = () => {
-      callback(false);
-    };
-  }
-}
-
 const CreateForm = () => {
   const [tournamentName, setTournamentName] = useState('');
   const [sport, setSport] = useState('');
@@ -35,10 +18,6 @@ const CreateForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if (!imageURL || imageURL === '') {
-      setimageURL("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s")
-    }
 
     if (!tournamentName || !sport || !description || !selectedDate) {
       setError('Please fill out all fields.');
@@ -48,7 +27,6 @@ const CreateForm = () => {
       setError('Please add at least 2 teams.');
       return;
     }
-
 
     postTornament(
       tournamentName,
@@ -73,7 +51,7 @@ const CreateForm = () => {
   };
 
   const handleImageUrlChange = (e) => {
-    checkIfImageExists(e.target.value, (isValidUrl) => { 
+    checkIfImageExists(e.target.value, (isValidUrl) => {
       if (isValidUrl) {
         setimageURL(e.target.value);
       } else {
@@ -81,6 +59,22 @@ const CreateForm = () => {
       }
     });
   };
+
+  function checkIfImageExists(url, callback) {
+    const img = new Image();
+    img.src = url;
+
+    if (img.complete) {
+      callback(true);
+    } else {
+      img.onload = () => {
+        callback(true);
+      };
+      img.onerror = () => {
+        callback(false);
+      };
+    }
+  }
 
   const addTeam = () => {
     if (teamName.trim() === '') return;
