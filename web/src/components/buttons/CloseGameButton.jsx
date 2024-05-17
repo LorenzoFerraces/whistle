@@ -17,7 +17,7 @@ const CloseGameButton = ({ tournamentId, setTournament, setIsOpen }) => {
       <Modal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
-        header={'Are you sure'}
+        header={'Do you really want to close the tournament ?'}
       >
         <div className="buttons">
           <div className="add-button close-button">
