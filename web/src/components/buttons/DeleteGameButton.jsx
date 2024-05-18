@@ -1,27 +1,31 @@
 import { useContext, useState } from 'react';
 import Modal from '../modal/Modal';
 import { AuthContext } from '../../api/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-const CloseGameButton = ({ tournamentId, setTournament, setIsOpen }) => {
+const DeleteGameButton = ({ tournamentId }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { closeTournament } = useContext(AuthContext);
+  const { DeleteTournament } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const handlerCloseGame = () => {
-    closeTournament(tournamentId, setTournament, setIsOpen);
+  const handlerDeleteGame = () => {
     setModalIsOpen(false);
+    DeleteTournament(tournamentId, navigate);
   };
 
   return (
     <div className="add-button">
-      <button onClick={() => setModalIsOpen(true)}>Close </button>
+      <button className="delete" onClick={() => setModalIsOpen(true)}>
+        Delete{' '}
+      </button>
       <Modal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
-        header={'Do you really want to close the tournament ?'}
+        header={'Do you really want to delete the tournament ?'}
       >
         <div className="buttons">
           <div className="add-button close-button">
-            <button title="Yes" onClick={handlerCloseGame}>
+            <button title="Yes" onClick={handlerDeleteGame}>
               Yes
             </button>
           </div>
@@ -37,4 +41,4 @@ const CloseGameButton = ({ tournamentId, setTournament, setIsOpen }) => {
   );
 };
 
-export default CloseGameButton;
+export default DeleteGameButton;

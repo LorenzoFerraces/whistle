@@ -44,9 +44,6 @@ class TournamentController(private var system: System, private var tokenControll
     fun deleteTournament(context: Context) {
         try{
             val id = context.pathParam("id")
-            if (id.toIntOrNull() == null){
-                throw BadRequestResponse()
-            }
             var userID = tokenController.tokenToUserId(context)
             system.removeTournament(id, userID)
         }catch (e : NotTournamentFoundException) {

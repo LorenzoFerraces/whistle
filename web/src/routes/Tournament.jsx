@@ -6,6 +6,7 @@ import AddResultButton from '../components/buttons/AddResultButton';
 import TeamList from '../components/teamList/TeamList';
 import ShowGamesButton from '../components/buttons/ShowGamesButton';
 import CloseGameButton from '../components/buttons/CloseGameButton';
+import DeleteGameButton from '../components/buttons/DeleteGameButton';
 
 const Tournament = () => {
   const { tournamentId } = useParams();
@@ -54,12 +55,14 @@ const Tournament = () => {
               tournamentStatus={isOpen}
             />
 
-            {isOpen && (
+            {isOpen ? (
               <CloseGameButton
                 tournamentId={tournamentId}
                 setTournament={setTournament}
                 setIsOpen={setIsOpen}
               />
+            ) : (
+              <DeleteGameButton tournamentId={tournamentId} />
             )}
           </div>
         </div>

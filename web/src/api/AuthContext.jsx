@@ -147,7 +147,6 @@ export const AuthProvider = ({ children }) => {
       .then((response) => {
         setUser(response.data);
         setTournaments(response.data.tournaments);
-        console.log(response.data.tournaments);
       })
       .catch((error) => setError(error))
       .finally(() => setSucces(true));
@@ -166,7 +165,8 @@ export const AuthProvider = ({ children }) => {
     setSucces(false);
     setError();
     if (!imageURL || imageURL === '') {
-      imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
+      imageURL =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s';
     }
     axios
       .post(url + '/tournament', {
@@ -175,7 +175,7 @@ export const AuthProvider = ({ children }) => {
         date,
         teams,
         sport,
-        imageURL
+        imageURL,
       })
       .then((response) => {
         const data = response.data;
@@ -272,6 +272,15 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => setError(error));
   };
 
+  const DeleteTournament = (tournamentId, navigate) => {
+    setError();
+    console.log(tournamentId);
+    axios
+      .delete(url + `/tournament/${tournamentId}`)
+      .then(navigate('/tournaments'))
+      .catch((error) => setError(error));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -289,6 +298,7 @@ export const AuthProvider = ({ children }) => {
         editGame,
         getUserTournamentsSearch,
         closeTournament,
+        DeleteTournament,
       }}
     >
       <ToastContainer />
