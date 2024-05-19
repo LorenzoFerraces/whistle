@@ -8,7 +8,7 @@ const AddResultButton = ({ tournamentId, teams, setTournament }) => {
 
   return (
     <div className="add-button">
-      <button onClick={() => setModalIsOpen(true)}>Add Result</button>
+      <button onClick={() => setModalIsOpen(true)}>+</button>
       <Modal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}

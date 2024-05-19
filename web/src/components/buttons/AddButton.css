@@ -1,6 +1,7 @@
 .add-button {
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .add-button button {
