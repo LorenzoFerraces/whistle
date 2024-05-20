@@ -88,9 +88,10 @@ const Tournament = () => {
           <div className="header">
             <img src={tournament.imageURL} alt="Tournament" />
             <h3>Tournament: {tournament.name}</h3>
-            <h3>Sport: {tournament.sport}</h3>
-            <h3>Date: {tournament.date}</h3>
-            <h3>Status: {statusToStrint(tournament.status)}</h3>
+            <h2>Description: {tournament.description}</h2>
+            <h2>Sport: {tournament.sport}</h2>
+            <h2>Date: {tournament.date}</h2>
+            <h2>Status: {statusToStrint(tournament.status)}</h2>
             <div className="options">
               <div className="buttons-up">
                 <ShowGamesButton
