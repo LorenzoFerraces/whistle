@@ -7,6 +7,8 @@ import TeamList from '../components/teamList/TeamList';
 import ShowGamesButton from '../components/buttons/ShowGamesButton';
 import CloseGameButton from '../components/buttons/CloseGameButton';
 import DeleteGameButton from '../components/buttons/DeleteGameButton';
+import { SlCalender } from 'react-icons/sl';
+import { FaCircle } from 'react-icons/fa6';
 
 const Tournament = () => {
   const { tournamentId } = useParams();
@@ -26,19 +28,14 @@ const Tournament = () => {
         ));
     };
     fetchData();
+    if (success) {
+      document.title = tournament.name;
+    }
   }, [tournamentId, getTournament, isOpen]);
 
   if (!tournament) {
     return <p>Loading...</p>;
   }
-
-  const statusToStrint = (state) => {
-    if (state == 'true') {
-      return 'Open';
-    } else {
-      return 'Close';
-    }
-  };
 
   return (
     <>
@@ -68,6 +65,13 @@ const Tournament = () => {
           border-radius: 10px;
         }
 
+        .header span {
+          font-size: larger;
+          color: grey;
+          margin-left: 5px;
+          margin-up: 5px;
+        }
+
         .header img {
           width: 100%;
           height: auto;
@@ -81,17 +85,37 @@ const Tournament = () => {
         .buttons .delete {
           background-color: red;
         }
+
+        .description {
+          color: white;
+          font-size: larger;
+        }
       `}</style>
       <Menu />
       <div className="element main">
         <div className="izq">
           <div className="header">
             <img src={tournament.imageURL} alt="Tournament" />
-            <h3>Tournament: {tournament.name}</h3>
-            <h2>Description: {tournament.description}</h2>
-            <h2>Sport: {tournament.sport}</h2>
-            <h2>Date: {tournament.date}</h2>
-            <h2>Status: {statusToStrint(tournament.status)}</h2>
+            <h3> {tournament.name}</h3>
+            <div className="description"> {tournament.description}</div>
+            <span>{tournament.sport}</span>
+            <div>
+              <SlCalender color="grey" />
+              <span>{tournament.date}</span>
+            </div>
+            <div>
+              {tournament.status === 'true' ? (
+                <div className="status">
+                  <FaCircle color="green" />
+                  <span>OPEN</span>
+                </div>
+              ) : (
+                <div className="status">
+                  <FaCircle color="red" />
+                  <span>CLOSED</span>
+                </div>
+              )}
+            </div>
             <div className="options">
               <div className="buttons-up">
                 <ShowGamesButton

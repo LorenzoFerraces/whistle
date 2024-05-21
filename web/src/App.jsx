@@ -6,10 +6,12 @@ import Tournaments from './routes/Tournaments';
 import Tournament from './routes/Tournament';
 import { Private } from './routes/Private';
 import NotFound from './routes/NotFound';
+import TitleManager from './components/titleManager/TitleManager';
 
 function App() {
   return (
     <BrowserRouter>
+      <TitleManager />
       <Routes>
         <Route
           path="/"

@@ -13,7 +13,7 @@ const ShowGamesButton = ({
 
   return (
     <div className="add-button">
-      <button onClick={() => setModalIsOpen(true)}>History</button>
+      <button onClick={() => setModalIsOpen(true)}>Results</button>
       <Modal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
