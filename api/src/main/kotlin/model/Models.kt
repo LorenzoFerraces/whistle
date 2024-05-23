@@ -65,7 +65,17 @@ enum class Locations {
     Salta, SanJuan,
     SanLuís, SantaCruz,
     SantaFe, SantiagoDelEstero,
-    TierraDelFuego, Tucumán
+    TierraDelFuego, Tucumán;
+
+    fun toFriendlyString(): String {
+        return name.replace(Regex("([a-z])([A-Z])"), "$1 $2")
+    }
+
+    companion object {
+        fun fromString(location: String): Locations? {
+            return values().firstOrNull { it.name.equals(location.replace(" ", ""), ignoreCase = true) }
+        }
+    }
 }
 
 enum class Sports {

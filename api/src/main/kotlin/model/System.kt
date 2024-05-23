@@ -265,7 +265,7 @@ class System(private val dataManager: DataManager) {
         return shuffledTeams.take(numTeams)
     }
 
-    fun searchTournamentsOfUser(userId: String, sport: String?, name: String?): List<Tournament> {
+    fun searchTournamentsOfUser(userId: String, sport: String?, location: String?, name: String?): List<Tournament> {
         val user = getUser(userId)
         val tournaments = user.tournaments
 
@@ -275,10 +275,16 @@ class System(private val dataManager: DataManager) {
             tournaments
         }
 
-        // Filtrar por nombre si se proporciona un nombre
+        val locationEnum = location?.let { Locations.fromString(it) }
+        val filteredByLocation = if (locationEnum != null) {
+            filteredBySport.filter { it.location == locationEnum }
+        } else {
+            filteredBySport
+        }
+
         val filteredByName = name?.let { nameToSearch ->
-            filteredBySport.filter { it.name.contains(nameToSearch, ignoreCase = true) }
-        } ?: filteredBySport // Si no se proporciona un nombre, se devuelve la lista sin filtrar
+            filteredByLocation.filter { it.name.contains(nameToSearch, ignoreCase = true) }
+        } ?: filteredByLocation
 
         return filteredByName
     }

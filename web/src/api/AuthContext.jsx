@@ -8,6 +8,32 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({ logged: false });
   const sports = ['Football', 'Volleyball', 'Handball'];
+  const locations = [
+    'Buenos Aires',
+    'Capital Federal',
+    'Catamarca',
+    'Chaco',
+    'Chubut',
+    'Córdoba',
+    'Corrientes',
+    'Entre Ríos',
+    'Formosa',
+    'Jujuy',
+    'La Pampa',
+    'La Rioja',
+    'Mendoza',
+    'Misiones',
+    'Neuquen',
+    'Río Negro',
+    'Salta',
+    'San Juan',
+    'San Luís',
+    'Santa Cruz',
+    'Santa Fe',
+    'Santiago Del Estero',
+    'Tierra Del Fuego',
+    'Tucumán',
+  ];
   const [userLoad, setUserLoad] = useState(false);
   const [error, setError] = useState();
   const url = 'http://localhost:8001';
@@ -260,11 +286,18 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => setError(error));
   };
 
-  const getUserTournamentsSearch = (userId, sport, name, setTournaments) => {
+  const getUserTournamentsSearch = (
+    userId,
+    sport,
+    location,
+    name,
+    setTournaments,
+  ) => {
     setError();
     axios
       .get(
-        url + `/user/${userId}/tournaments/search?sport=${sport}&name=${name}`,
+        url +
+          `/user/${userId}/tournaments/search?sport=${sport}&location=${location}&name=${name}`,
       )
       .then((response) => {
         setTournaments(response.data);
@@ -287,6 +320,7 @@ export const AuthProvider = ({ children }) => {
         userInfo,
         userLoad,
         sports,
+        locations,
         postLogin,
         logOut,
         postRegister,

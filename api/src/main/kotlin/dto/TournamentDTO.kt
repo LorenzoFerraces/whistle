@@ -22,7 +22,7 @@ class TournamentDTO() {
         this.name = tournament.name
         this.description = tournament.description
         this.sport = tournament.sport.name
-        this.location = tournament.location.name
+        this.location = tournament.location.toFriendlyString()
         this.date = tournament.date
         this.status = tournament.status.toString()
         this.teams = tournament.teams

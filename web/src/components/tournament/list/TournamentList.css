@@ -2,3 +2,10 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+#tournament-list .not-found {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 50px;
+}

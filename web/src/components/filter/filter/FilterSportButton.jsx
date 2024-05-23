@@ -1,6 +1,6 @@
-import './FilterTournamentsButton.css';
+import './FilterButton.css';
 
-const FilterTournamentButton = ({ sports, inputSport, setInputSport }) => {
+const FilterSportButton = ({ sports, inputSport, setInputSport }) => {
   const handleChange = (e) => {
     setInputSport(e.target.value);
   };
@@ -17,4 +17,4 @@ const FilterTournamentButton = ({ sports, inputSport, setInputSport }) => {
   );
 };
 
-export default FilterTournamentButton;
+export default FilterSportButton;

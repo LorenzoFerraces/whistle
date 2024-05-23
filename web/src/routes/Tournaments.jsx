@@ -32,7 +32,7 @@ const Tournaments = () => {
           ) : null}
           <AddTournamentButton />
         </div>
-        {success && tournaments && <TournamentList tournaments={tournaments} />}
+        {tournaments && <TournamentList tournaments={tournaments} />}
       </div>
     </>
   );

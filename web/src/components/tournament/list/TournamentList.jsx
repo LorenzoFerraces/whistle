@@ -9,6 +9,9 @@ const TournamentList = ({ tournaments }) => {
           <SimpleTournament tournament={tournament} key={index} />
         ))}{' '}
       </div>
+      {tournaments.length == 0 && (
+        <div className="not-found">No Tournament Found</div>
+      )}
     </div>
   );
 };

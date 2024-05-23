@@ -1,22 +1,37 @@
 import { useContext, useEffect, useState } from 'react';
-import FilterTournamentButton from './button/FilterTournamentsButton';
+import { IoFilter } from 'react-icons/io5';
 import SearchTournamentBox from './search/SearchTournamentBox';
 import { AuthContext } from '../../api/AuthContext';
-import './FilterTournament.css'
+import './FilterTournament.css';
+import FilterLocationButton from './filter/FilterLocationButton';
+import FilterSportButton from './filter/FilterSportButton';
 
 const FilterTournaments = ({ userId, setTournaments }) => {
   const [inputSport, setInputSport] = useState('');
+  const [inputLocation, setInputLocation] = useState('');
   const [inputText, setInputText] = useState('');
-  const { getUserTournamentsSearch, sports } = useContext(AuthContext);
+  const [showFilters, setShowFilters] = useState(false);
+  const { getUserTournamentsSearch, sports, locations } =
+    useContext(AuthContext);
 
   const handleSubmit = () => {
-    getUserTournamentsSearch(userId, inputSport, inputText, setTournaments);
+    getUserTournamentsSearch(
+      userId,
+      inputSport,
+      inputLocation,
+      inputText,
+      setTournaments,
+    );
   };
 
   useEffect(() => {
     handleSubmit();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputSport]);
+  }, [inputSport, inputLocation]);
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
 
   return (
     <div className="search-box">
@@ -25,11 +40,27 @@ const FilterTournaments = ({ userId, setTournaments }) => {
         inputText={inputText}
         handleSubmit={handleSubmit}
       />
-      <FilterTournamentButton
-        sports={sports}
-        inputSport={inputSport}
-        setInputSport={setInputSport}
-      />
+      <button className="filters-toggle" onClick={toggleFilters}>
+        <IoFilter />
+        FILTERS
+      </button>
+      {showFilters && (
+        <div className="filters-section">
+          <span>Filter Tournaments</span>
+          <div className="filter-buttons">
+            <FilterLocationButton
+              locations={locations}
+              inputLocation={inputLocation}
+              setInputLocation={setInputLocation}
+            />
+            <FilterSportButton
+              sports={sports}
+              inputSport={inputSport}
+              setInputSport={setInputSport}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

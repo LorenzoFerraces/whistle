@@ -11,10 +11,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --back: #1c1d20;
+  --back: #1b1d22;
   --c1: #444546;
   --c2: #3c3f42;
-  --c3: #080c13;
+  --c3: #161616;
   --accent: #db4105;
   --text: white;
   --text2: gray;
