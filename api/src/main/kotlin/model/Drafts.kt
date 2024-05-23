@@ -17,7 +17,8 @@ class DraftTournament(
     val date: String,
     val teams: List<String>,
     val sport: String,
-    val imageURL: String
+    val imageURL: String,
+    val location: String,
 )
 
 class DraftGame(

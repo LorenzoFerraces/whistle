@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import './AddButton.css';
-import GameForm from '../form/game/GameForm';
-import Modal from '../modal/Modal';
+import GameForm from '../../../form/game/GameForm';
+import Modal from '../../../modal/basic/BasicModal';
+import './TournamentPanelButton.css';
 
 const AddResultButton = ({ tournamentId, teams, setTournament }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
-    <div className="add-button">
+    <div className="panel-button">
       <button onClick={() => setModalIsOpen(true)}>+</button>
       <Modal
         open={modalIsOpen}

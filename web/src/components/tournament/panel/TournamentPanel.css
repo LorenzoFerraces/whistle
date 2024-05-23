@@ -1,0 +1,9 @@
+.tournament-panel {
+  margin-right: 10px;
+}
+
+.tournament-panel .top-section {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

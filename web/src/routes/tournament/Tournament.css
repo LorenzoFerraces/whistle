@@ -1,0 +1,11 @@
+#tournament {
+  display: flex;
+}
+
+#tournament .izq {
+  flex-basis: 20%;
+}
+
+#tournament .der {
+  flex-basis: 80%;
+}

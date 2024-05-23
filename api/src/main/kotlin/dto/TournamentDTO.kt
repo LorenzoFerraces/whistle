@@ -9,6 +9,7 @@ class TournamentDTO() {
     lateinit var name: String
     lateinit var description: String
     lateinit var sport: String
+    lateinit var location: String
     lateinit var date: String
     lateinit var status: String
     lateinit var teams: List<Team>
@@ -21,6 +22,7 @@ class TournamentDTO() {
         this.name = tournament.name
         this.description = tournament.description
         this.sport = tournament.sport.name
+        this.location = tournament.location.name
         this.date = tournament.date
         this.status = tournament.status.toString()
         this.teams = tournament.teams

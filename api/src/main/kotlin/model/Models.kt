@@ -19,12 +19,13 @@ class Tournament(
     var description: String,
     var sport: Sports,
     val date: String,
+    var location: Locations,
+    var imageURL: String,
     var teams: List<Team>,
     var nextGameID: Int,
     var games: MutableList<Game>,
     var status: Boolean,
     val user: SimpleUser,
-    var imageURL: String,
 )
 
 class Team (
@@ -51,6 +52,21 @@ class Game(
     var team2: String,
     var score2: Int,
 )
+
+enum class Locations {
+    BuenosAires, CapitalFederal,
+    Catamarca, Chaco,
+    Chubut, Córdoba,
+    Corrientes, EntreRíos,
+    Formosa, Jujuy,
+    LaPampa, LaRioja,
+    Mendoza, Misiones,
+    Neuquen, RíoNegro,
+    Salta, SanJuan,
+    SanLuís, SantaCruz,
+    SantaFe, SantiagoDelEstero,
+    TierraDelFuego, Tucumán
+}
 
 enum class Sports {
     Football, Volleyball, Handball

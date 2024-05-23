@@ -1,4 +1,4 @@
-import { FaSearch } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa';
 import './SearchTournamentBox.css';
 
 const SearchTournamentBox = ({ inputText, setInputText, handleSubmit }) => {
@@ -18,6 +18,9 @@ const SearchTournamentBox = ({ inputText, setInputText, handleSubmit }) => {
 
   return (
     <div className="search-bar">
+      <button onClick={handleClick}>
+        <FaSearch size={16} />
+      </button>
       <input
         type="text"
         placeholder="Search tournament..."
@@ -25,9 +28,6 @@ const SearchTournamentBox = ({ inputText, setInputText, handleSubmit }) => {
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
-      <button onClick={handleClick}>
-        <FaSearch />
-      </button>
     </div>
   );
 };

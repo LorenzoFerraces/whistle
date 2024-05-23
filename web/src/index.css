@@ -11,12 +11,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --back: #1e2329;
-  --c1: #45474b;
-  --c2: #383a3d;
-  --c3: #db4105;
+  --back: #1c1d20;
+  --c1: #444546;
+  --c2: #3c3f42;
+  --c3: #080c13;
+  --accent: #db4105;
   --text: white;
-  --line: #8f8e8d;
+  --text2: gray;
+  --line: rgb(180, 178, 178);
 }
 
 a {
@@ -26,7 +28,7 @@ a {
 
 a:hover {
   text-decoration: none;
-  color: var(--c3);
+  color: var(--accent);
 }
 
 body {
@@ -42,6 +44,7 @@ body {
 
 .element .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -51,15 +54,12 @@ body {
 }
 
 .main {
-  width: 95%;
-  margin: 0px auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 2%;
 }
 
 h3 {
   margin-top: 0;
-  margin-bottom: 5px;
-  font-size: 2rem;
+  margin-bottom: 3px;
+  font-size: 1.8rem;
   color: var(--text);
 }

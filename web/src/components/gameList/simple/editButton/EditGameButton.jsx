@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Modal from '../../../modal/Modal';
+import Modal from '../../../modal/basic/BasicModal';
 import { MdEdit } from 'react-icons/md';
 import './EditGameButton.css';
 import EditGameForm from './form/EditGameForm';

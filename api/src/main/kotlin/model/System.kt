@@ -53,6 +53,11 @@ class System(private val dataManager: DataManager) {
         } catch (e: IllegalArgumentException) {
             throw InvalidSportException()
         }
+        val locationEnum = try {
+            Locations.valueOf(draft.location)
+        } catch (e: IllegalArgumentException) {
+            throw InvalidSportException()
+        }
         val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
         val imageUrl = if (draft.imageURL.isBlank()) defaultImage else draft.imageURL
 
@@ -62,12 +67,13 @@ class System(private val dataManager: DataManager) {
             draft.description,
             sportEnum,
             draft.date,
+            locationEnum,
+            imageUrl,
             teams,
             1,
             mutableListOf<Game>(),
             true,
             SimpleUser(user.id, user.username),
-            imageUrl
         )
         tournaments.add(tournament)
         user.tournaments.add(tournament)
@@ -97,7 +103,6 @@ class System(private val dataManager: DataManager) {
         dataManager.saveData(this)
         return tournament
     }
-
 
     //Games
     fun addGame(tournamentID: String, gameDraft: DraftGame): Tournament {
@@ -239,8 +244,9 @@ class System(private val dataManager: DataManager) {
         val date = generateRandomDate()
         val teams = generateRandomTeams()
         val sport = Sports.values().random().name
+        val location = Locations.values().random().name
         print(sport)
-        return DraftTournament(name, description, date, teams, sport, imageUrl)
+        return DraftTournament(name, description, date, teams, sport, imageUrl, location)
     }
 
     private fun generateRandomDate(): String {

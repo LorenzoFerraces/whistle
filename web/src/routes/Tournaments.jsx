@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-import Menu from '../components/menu/Menu';
 import { AuthContext } from '../api/AuthContext';
 import AddTournamentButton from '../components/buttons/AddTournamentButton';
-import TournamentList from '../components/tournamentList/TournamentList';
 import FilterTournaments from '../components/filter/FilterTournaments';
+import TournamentList from '../components/tournament/list/TournamentList';
 
 const Tournaments = () => {
   const [user, setUser] = useState([]);
@@ -22,10 +21,9 @@ const Tournaments = () => {
   }, [userLoad, getUser, userInfo]);
   return (
     <>
-      <Menu />
       <div className="element main">
         <div className="header">
-          <h3>My Tournaments</h3>
+          <h3>MY TOURNAMENTS</h3>
           {user && user.id ? (
             <FilterTournaments
               userId={user.id}

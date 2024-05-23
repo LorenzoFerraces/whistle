@@ -1,0 +1,20 @@
+#tournament-info {
+  margin-right: 10px;
+}
+
+#tournament-info .image {
+  background-color: var(--c2);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#tournament-info .info h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#tournament-info .info span {
+  color: var(--text2);
+  margin-left: 5px;
+  font-size: large;
+}

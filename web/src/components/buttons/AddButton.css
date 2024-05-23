@@ -1,20 +1,18 @@
 .add-button {
   justify-content: center;
   align-items: center;
-  padding: 10px;
 }
 
 .add-button button {
-  background: var(--c3);
-  border-radius: 50px;
+  background: var(--accent);
+  border-radius: 35px;
   border-style: none;
-  box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
   flex-shrink: 0;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 500;
-  padding: 10px;
+  padding: 3px 10px 3px 10px;
   text-align: center;
 }
 

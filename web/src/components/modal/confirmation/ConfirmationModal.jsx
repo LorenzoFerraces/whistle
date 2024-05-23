@@ -1,23 +1,26 @@
 import ReactDom from 'react-dom';
-import './Modal.css';
+import './ConfirmationModal.css';
 
-const Modal = ({ open, children, onClose, header }) => {
+const ConfirmationModal = ({ open, onClose, header, action }) => {
   if (!open) return null;
   return ReactDom.createPortal(
     <>
       <div className="overlay-modal" onClick={onClose} />
-      <div className="modal">
+      <div className="confirmation-modal">
         <div className="header">
-          <h3>{header}</h3>
+          <span>{header}</span>
           <button className="close" onClick={onClose}>
             X
           </button>
         </div>
-        {children}
+        <div className="buttons">
+          <button onClick={action}>YES</button>
+          <button onClick={onClose}>NO</button>
+        </div>
       </div>
     </>,
     document.getElementById('portal'),
   );
 };
 
-export default Modal;
+export default ConfirmationModal;

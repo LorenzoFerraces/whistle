@@ -3,15 +3,17 @@ import Login from './routes/Login';
 import Register from './routes/Register';
 import Create from './routes/Create';
 import Tournaments from './routes/Tournaments';
-import Tournament from './routes/Tournament';
+import Tournament from './routes/tournament/Tournament';
 import { Private } from './routes/Private';
 import NotFound from './routes/NotFound';
 import TitleManager from './components/titleManager/TitleManager';
+import Menu from './components/menu/Menu';
 
 function App() {
   return (
     <BrowserRouter>
       <TitleManager />
+      <Menu />
       <Routes>
         <Route
           path="/"
