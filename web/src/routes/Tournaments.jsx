@@ -24,13 +24,17 @@ const Tournaments = () => {
       <div className="element main">
         <div className="header">
           <h3>MY TOURNAMENTS</h3>
-          {user && user.id ? (
-            <FilterTournaments
-              userId={user.id}
-              setTournaments={setTournaments}
-            />
-          ) : null}
-          <AddTournamentButton />
+          <div className="center">
+            {user && user.id ? (
+              <FilterTournaments
+                userId={user.id}
+                setTournaments={setTournaments}
+              />
+            ) : null}
+          </div>
+          <div className="right">
+            <AddTournamentButton />
+          </div>
         </div>
         {tournaments && <TournamentList tournaments={tournaments} />}
       </div>

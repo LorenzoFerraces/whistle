@@ -98,5 +98,22 @@ class TournamentController(private var system: System, private var tokenControll
         }
     }
 
+    fun getTournamentsSearch(context: Context) {
+        try {
+            var location = context.queryParam("location") ?: throw InvalidSportException()
+            var sport = context.queryParam("sport") ?: throw InvalidSportException()
+            var name = context.queryParam("name")
+            var results = system.searchTournaments(sport, location, name)
+            var tournamentsDTO = mutableListOf<TournamentDTO>()
+            for (tournament in results) {
+                var tournamentDTO = TournamentDTO(tournament)
+                tournamentsDTO.add(tournamentDTO)
+            }
+            context.json(tournamentsDTO)
+        }catch (e: InvalidSportException){
+            tokenController.errorResponse(context, HttpStatus.BAD_REQUEST, "Invalid sport")
+        }
+    }
+
 
 }

@@ -305,12 +305,35 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => setError(error));
   };
 
+  const getTournamentsSearch = (sport, location, name, setTournaments) => {
+    setError();
+    axios
+      .get(
+        url +
+          `/tournament/search?sport=${sport}&location=${location}&name=${name}`,
+      )
+      .then((response) => {
+        setTournaments(response.data);
+      })
+      .catch((error) => setError(error));
+  };
+
   const DeleteTournament = (tournamentId, navigate) => {
     setError();
     console.log(tournamentId);
     axios
       .delete(url + `/tournament/${tournamentId}`)
       .then(navigate('/tournaments'))
+      .catch((error) => setError(error));
+  };
+
+  const getTournaments = (setTournament) => {
+    setError();
+    axios
+      .get(url + `/tournament`)
+      .then((response) => {
+        setTournament(response.data);
+      })
       .catch((error) => setError(error));
   };
 
@@ -333,6 +356,8 @@ export const AuthProvider = ({ children }) => {
         getUserTournamentsSearch,
         closeTournament,
         DeleteTournament,
+        getTournaments,
+        getTournamentsSearch,
       }}
     >
       <ToastContainer />

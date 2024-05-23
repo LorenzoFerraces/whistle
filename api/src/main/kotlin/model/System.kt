@@ -289,5 +289,28 @@ class System(private val dataManager: DataManager) {
         return filteredByName
     }
 
+    fun searchTournaments(sport: String?, location: String?, name: String?): List<Tournament> {
+        val tournaments = this.tournaments
+
+        val filteredBySport = if (!sport.isNullOrBlank()) {
+            tournaments.filter { it.sport.name == sport }
+        } else {
+            tournaments
+        }
+
+        val locationEnum = location?.let { Locations.fromString(it) }
+        val filteredByLocation = if (locationEnum != null) {
+            filteredBySport.filter { it.location == locationEnum }
+        } else {
+            filteredBySport
+        }
+
+        val filteredByName = name?.let { nameToSearch ->
+            filteredByLocation.filter { it.name.contains(nameToSearch, ignoreCase = true) }
+        } ?: filteredByLocation
+
+        return filteredByName
+    }
+
 
 }

@@ -15,6 +15,9 @@ const Menu = () => {
         </div>
       </NavLink>
       <div className="center">
+        <NavLink to="/search">
+          <span>SEARCH</span>
+        </NavLink>
         <NavLink to="/tournaments">
           <span>MY TOURNAMENTS</span>
         </NavLink>

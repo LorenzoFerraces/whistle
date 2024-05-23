@@ -2,6 +2,9 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search-box .filters-toggle {

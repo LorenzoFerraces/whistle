@@ -11,17 +11,26 @@ const FilterTournaments = ({ userId, setTournaments }) => {
   const [inputLocation, setInputLocation] = useState('');
   const [inputText, setInputText] = useState('');
   const [showFilters, setShowFilters] = useState(false);
-  const { getUserTournamentsSearch, sports, locations } =
+  const { getUserTournamentsSearch, sports, locations, getTournamentsSearch } =
     useContext(AuthContext);
 
   const handleSubmit = () => {
-    getUserTournamentsSearch(
-      userId,
-      inputSport,
-      inputLocation,
-      inputText,
-      setTournaments,
-    );
+    if (userId) {
+      getUserTournamentsSearch(
+        userId,
+        inputSport,
+        inputLocation,
+        inputText,
+        setTournaments,
+      );
+    } else {
+      getTournamentsSearch(
+        inputSport,
+        inputLocation,
+        inputText,
+        setTournaments,
+      );
+    }
   };
 
   useEffect(() => {

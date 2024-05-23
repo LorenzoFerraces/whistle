@@ -45,12 +45,22 @@ body {
 .element .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  position: relative;
 }
 
-.element .header .buttons {
-  display: flex;
-  gap: 10px;
+.element .header h3 {
+  margin-right: auto;
+}
+
+.element .header .center {
+  flex: 1;
+  text-align: center;
+}
+
+.element .header .right {
+  position: absolute;
+  right: 0;
 }
 
 .main {

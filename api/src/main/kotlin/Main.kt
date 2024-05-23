@@ -54,6 +54,9 @@ class Api {
             ApiBuilder.path("tournament") {
                 ApiBuilder.get(tournamentController::getAllTournaments, Roles.ANYONE)
                 ApiBuilder.post(tournamentController::postTournament, Roles.USER)
+                ApiBuilder.path("search") {
+                    ApiBuilder.get(tournamentController::getTournamentsSearch, Roles.ANYONE)
+                }
                 ApiBuilder.path("{id}") {
                     ApiBuilder.get(tournamentController::getTournament, Roles.ANYONE)
                     ApiBuilder.delete(tournamentController::deleteTournament, Roles.USER)

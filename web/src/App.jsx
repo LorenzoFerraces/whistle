@@ -8,6 +8,7 @@ import { Private } from './routes/Private';
 import NotFound from './routes/NotFound';
 import TitleManager from './components/titleManager/TitleManager';
 import Menu from './components/menu/Menu';
+import Search from './routes/Search';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/search" element={<Search />} />
         <Route
           path="/create"
           element={
