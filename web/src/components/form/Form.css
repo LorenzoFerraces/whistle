@@ -10,7 +10,7 @@
 }
 
 .simple-form button {
-  background: var(--c3);
+  background: var(--accent);
   border-radius: 3px;
   border-style: none;
   box-sizing: border-box;

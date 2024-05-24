@@ -38,7 +38,7 @@ const Tournament = () => {
         />
       </div>
       <div className="der">
-        <TeamList teams={tournament.teams} />
+        <TeamList teams={tournament.teams} status={tournament.status} />
       </div>
     </div>
   );

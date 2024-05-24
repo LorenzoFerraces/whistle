@@ -15,12 +15,12 @@ const CloseTournamentButton = ({ tournamentId, setTournament, setIsOpen }) => {
   return (
     <div className="panel-button">
       <button className="red" onClick={() => setModalIsOpen(true)}>
-        Close{' '}
+        Close
       </button>
       <ConfirmationModal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
-        header={'Do you really want to delete the tournament ?'}
+        header={'Do you really want to close the tournament ?'}
         action={() => handlerCloseTournament()}
       />
     </div>

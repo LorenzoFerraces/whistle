@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import SimpleGame from './simple/SimpleGame';
+import { AuthContext } from '../../api/AuthContext';
 
 const GameList = ({
   tournamentId,
@@ -6,7 +8,9 @@ const GameList = ({
   teams,
   setTournament,
   tournamentStatus,
+  tournamentUserId,
 }) => {
+  const { userInfo } = useContext(AuthContext);
   return (
     <div className="game-list element">
       {games.length ? (
@@ -18,6 +22,8 @@ const GameList = ({
             setTournament={setTournament}
             key={index}
             tournamentStatus={tournamentStatus}
+            userInfo={userInfo}
+            tournamentUserId={tournamentUserId}
           />
         ))
       ) : (

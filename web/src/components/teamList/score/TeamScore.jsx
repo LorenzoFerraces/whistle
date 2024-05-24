@@ -1,4 +1,3 @@
-import React from 'react';
 import './TeamScore.css';
 
 const TeamScore = ({ team, highlightFirstRow }) => {

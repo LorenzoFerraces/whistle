@@ -72,7 +72,7 @@ class System(private val dataManager: DataManager) {
             teams,
             1,
             mutableListOf<Game>(),
-            true,
+            Status.Open,
             SimpleUser(user.id, user.username),
         )
         tournaments.add(tournament)
@@ -99,7 +99,7 @@ class System(private val dataManager: DataManager) {
     fun closeGame(tournamentId: String, userId: String): Tournament {
         val tournament = tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
         if (tournament.user.id != userId) throw UserException("You are not authorized to modify this tournament")
-        tournament.status = false
+        tournament.status = Status.Close
         dataManager.saveData(this)
         return tournament
     }
@@ -245,7 +245,6 @@ class System(private val dataManager: DataManager) {
         val teams = generateRandomTeams()
         val sport = Sports.values().random().name
         val location = Locations.values().random().name
-        print(sport)
         return DraftTournament(name, description, date, teams, sport, imageUrl, location)
     }
 

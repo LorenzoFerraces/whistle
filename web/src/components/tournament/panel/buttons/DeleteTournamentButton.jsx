@@ -17,7 +17,7 @@ const DeleteTournamentButton = ({ tournamentId }) => {
   return (
     <div className="panel-button">
       <button className="red" onClick={() => setModalIsOpen(true)}>
-        Delete{' '}
+        Delete
       </button>
       <ConfirmationModal
         open={modalIsOpen}

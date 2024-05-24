@@ -1,17 +1,20 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../api/AuthContext';
 import { Navigate } from 'react-router-dom';
+import './Form.css';
 
 const CreateForm = () => {
   const [tournamentName, setTournamentName] = useState('');
   const [sport, setSport] = useState('');
+  const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [teamName, setTeamName] = useState('');
   const [teamsNames, setTeamsNames] = useState([]);
   const [teams, setTeams] = useState([]);
   const [imageURL, setimageURL] = useState('');
-  const { setError, postTornament, sports } = useContext(AuthContext);
+  const { setError, postTornament, sports, locations } =
+    useContext(AuthContext);
   const [tournament, setTournament] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -19,7 +22,13 @@ const CreateForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!tournamentName || !sport || !description || !selectedDate) {
+    if (
+      !tournamentName ||
+      !sport ||
+      !description ||
+      !selectedDate ||
+      !location
+    ) {
       setError('Please fill out all fields.');
       return;
     }
@@ -35,6 +44,7 @@ const CreateForm = () => {
       teamsNames,
       sport,
       imageURL,
+      location,
       setTournament,
       setSuccess,
     );
@@ -130,6 +140,29 @@ const CreateForm = () => {
             />
           </div>
           <div>
+            <div>PROVINCE</div>
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            >
+              <option value="">Select Province</option>
+              {locations.map((locationOption, index) => (
+                <option key={index} value={locationOption}>
+                  {locationOption.charAt(0).toUpperCase() +
+                    locationOption.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <div>IMAGEN URL</div>
+            <input
+              type="text"
+              value={imageURL}
+              onChange={handleImageUrlChange}
+            />
+          </div>
+          <div>
             <div>TEAMS</div>
             <input
               type="text"
@@ -145,15 +178,6 @@ const CreateForm = () => {
               ))}
             </ul>
           </div>
-          <div>
-            <div>IMAGEN URL</div>
-            <input
-              type="text"
-              value={imageURL}
-              onChange={handleImageUrlChange}
-            />
-          </div>
-
           <button type="submit">Create</button>
         </form>
         {success && tournament ? (

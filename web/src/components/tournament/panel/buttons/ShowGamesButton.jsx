@@ -9,6 +9,7 @@ const ShowGamesButton = ({
   teams,
   setTournament,
   tournamentStatus,
+  tournamentUserId,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -26,6 +27,7 @@ const ShowGamesButton = ({
           teams={teams}
           setTournament={setTournament}
           tournamentStatus={tournamentStatus}
+          tournamentUserId={tournamentUserId}
         />
       </Modal>
     </div>

@@ -1,8 +1,7 @@
-import React from 'react';
-import './TeamList.css';
 import TeamScore from './score/TeamScore';
+import './TeamList.css';
 
-const TeamList = ({ teams, isOpen }) => {
+const TeamList = ({ teams, status }) => {
   return (
     <table className="team-list">
       <thead>
@@ -22,7 +21,7 @@ const TeamList = ({ teams, isOpen }) => {
             <TeamScore
               key={team.name}
               team={team}
-              highlightFirstRow={!isOpen && index === 0}
+              highlightFirstRow={status === 'Close' && index === 0}
             />
           ))}
       </tbody>

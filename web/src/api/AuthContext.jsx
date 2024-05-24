@@ -185,6 +185,7 @@ export const AuthProvider = ({ children }) => {
     teams,
     sport,
     imageURL,
+    location,
     setTournament,
     setSucces,
   ) => {
@@ -202,6 +203,7 @@ export const AuthProvider = ({ children }) => {
         teams,
         sport,
         imageURL,
+        location,
       })
       .then((response) => {
         const data = response.data;
@@ -275,13 +277,12 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setSuccess(true));
   };
 
-  const closeTournament = (tournamentId, setTournament, setIsOpen) => {
+  const closeTournament = (tournamentId, setTournament) => {
     setError();
     axios
       .post(url + `/tournament/${tournamentId}/status`)
       .then((response) => {
         setTournament(response.data);
-        setIsOpen(response.data.status === 'true');
       })
       .catch((error) => setError(error));
   };

@@ -24,7 +24,7 @@ class Tournament(
     var teams: List<Team>,
     var nextGameID: Int,
     var games: MutableList<Game>,
-    var status: Boolean,
+    var status: Status,
     val user: SimpleUser,
 )
 
@@ -76,6 +76,10 @@ enum class Locations {
             return values().firstOrNull { it.name.equals(location.replace(" ", ""), ignoreCase = true) }
         }
     }
+}
+
+enum class Status{
+    Open, Close
 }
 
 enum class Sports {

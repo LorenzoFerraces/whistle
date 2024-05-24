@@ -34,7 +34,7 @@ const SimpleTournament = ({ tournament }) => {
                 <span>{tournament.location}</span>
               </div>
               <div className="status">
-                {tournament.status === 'true' ? (
+                {tournament.status === 'Open' ? (
                   <>
                     <FaCircle color="green" />
                     <span>OPEN</span>

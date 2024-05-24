@@ -1,5 +1,5 @@
-import './SimpleGame.css';
 import EditGameButton from './editButton/EditGameButton';
+import './SimpleGame.css';
 
 const SimpleGame = ({
   tournamentId,
@@ -7,6 +7,8 @@ const SimpleGame = ({
   teams,
   setTournament,
   tournamentStatus,
+  userInfo,
+  tournamentUserId,
 }) => {
   return (
     <div className="simple-game">
@@ -20,14 +22,16 @@ const SimpleGame = ({
           <span className="team-name">{game.team2}</span>
         </div>
       </div>
-      {tournamentStatus && (
-        <EditGameButton
-          tournamentId={tournamentId}
-          game={game}
-          teams={teams}
-          setTournament={setTournament}
-        />
-      )}
+      {userInfo.logged &&
+        tournamentUserId == userInfo.id &&
+        tournamentStatus === 'Open' && (
+          <EditGameButton
+            tournamentId={tournamentId}
+            game={game}
+            teams={teams}
+            setTournament={setTournament}
+          />
+        )}
     </div>
   );
 };
