@@ -53,11 +53,7 @@ class System(private val dataManager: DataManager) {
         } catch (e: IllegalArgumentException) {
             throw InvalidSportException()
         }
-        val locationEnum = try {
-            Locations.valueOf(draft.location)
-        } catch (e: IllegalArgumentException) {
-            throw InvalidSportException()
-        }
+        val locationEnum = Locations.fromString(draft.location) ?: throw InvalidLocationException()
         val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
         val imageUrl = if (draft.imageURL.isBlank()) defaultImage else draft.imageURL
 
