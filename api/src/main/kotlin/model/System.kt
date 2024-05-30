@@ -79,7 +79,9 @@ class System(private val dataManager: DataManager) {
         return tournament
     }
 
-    fun getAllTournaments(): List<Tournament> = tournaments.toList()
+    fun getAllTournaments(): List<Tournament> {
+        return tournaments.filter { it.privacy == Privacy.Public }
+    }
 
     fun getTournament(tournamentId: String): Tournament {
         return tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
@@ -289,11 +291,12 @@ class System(private val dataManager: DataManager) {
 
     fun searchTournaments(sport: String?, location: String?, name: String?): List<Tournament> {
         val tournaments = this.tournaments
+        val filteredByPrivacy = tournaments.filter { it.privacy == Privacy.Public }
 
         val filteredBySport = if (!sport.isNullOrBlank()) {
-            tournaments.filter { it.sport.name == sport }
+            filteredByPrivacy.filter { it.sport.name == sport }
         } else {
-            tournaments
+            filteredByPrivacy
         }
 
         val locationEnum = location?.let { Locations.fromString(it) }

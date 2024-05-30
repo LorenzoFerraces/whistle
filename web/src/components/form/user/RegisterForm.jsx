@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../api/AuthContext';
-import { FormButton, SimpleInput } from '../Form';
+import { FormButton, FormSubmitButton, SimpleInput } from '../Form';
 import './UserForm.css';
 
 const RegisterForm = () => {
@@ -45,7 +45,7 @@ const RegisterForm = () => {
     <div className="user-form">
       <div className="element">
         <h3>CREATE YOUR ACCOUNT</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <SimpleInput name={'Email'} value={email} set={setEmail} />
           </div>
@@ -57,11 +57,17 @@ const RegisterForm = () => {
             />
           </div>
           <div>
-            <SimpleInput name={'Password'} value={password} set={setPassword} />
+            <SimpleInput
+              name={'Password'}
+              type={'password'}
+              value={password}
+              set={setPassword}
+            />
           </div>
           <div>
             <SimpleInput
               name={'Repeat Passoword'}
+              type={'password'}
               value={repeatPassword}
               set={setRepeatPassword}
             />
@@ -69,12 +75,12 @@ const RegisterForm = () => {
           <div>
             <SimpleInput name={'Username'} value={username} set={setUsername} />
           </div>
-          <FormButton text={'Register'} onClick={handleSubmit} />
+          <FormSubmitButton text={'Register'} />
         </form>
         <div className="nav">
-          Already Have An Account?{' '}
+          Already Have An Account?
           <NavLink to="/login">
-            <button>Login</button>
+            <FormButton text={'login'} />
           </NavLink>
         </div>
       </div>

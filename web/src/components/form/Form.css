@@ -53,6 +53,7 @@
   margin-top: 3px;
   margin-bottom: 3px;
   text-align: center;
+  width: fit-content;
 }
 
 .switch {

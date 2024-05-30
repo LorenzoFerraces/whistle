@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../api/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FormButton, SimpleInput } from '../Form';
+import { FormButton, FormSubmitButton, SimpleInput } from '../Form';
 import './UserForm.css';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +30,7 @@ const LoginForm = () => {
     <div className="user-form">
       <div className="element">
         <h3>SIGN IN</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <SimpleInput
               name={'Sign in with email'}
@@ -39,14 +39,19 @@ const LoginForm = () => {
             />
           </div>
           <div>
-            <SimpleInput name={'Password'} value={password} set={setPassword} />
+            <SimpleInput
+              type={'password'}
+              name={'Password'}
+              value={password}
+              set={setPassword}
+            />
           </div>
-          <FormButton text={'Log In'} onClick={handleSubmit} />
+          <FormSubmitButton text={'Log In'} />
         </form>
         <div className="nav">
-          First Time in Whistle?{' '}
+          First Time in Whistle?
           <NavLink to="/register">
-            <button>Register</button>
+            <FormButton text={'Register'} />
           </NavLink>
         </div>
       </div>
