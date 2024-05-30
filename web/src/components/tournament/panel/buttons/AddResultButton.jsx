@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import GameForm from '../../../form/game/GameForm';
-import Modal from '../../../modal/basic/BasicModal';
+
 import './TournamentPanelButton.css';
+import BasicModal from '../../../modal/basic/BasicModal';
 
 const AddResultButton = ({ tournamentId, teams, setTournament }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -9,7 +10,7 @@ const AddResultButton = ({ tournamentId, teams, setTournament }) => {
   return (
     <div className="panel-button">
       <button onClick={() => setModalIsOpen(true)}>+</button>
-      <Modal
+      <BasicModal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
         header={'ADD RESULT'}
@@ -20,7 +21,7 @@ const AddResultButton = ({ tournamentId, teams, setTournament }) => {
           setTournament={setTournament}
           close={() => setModalIsOpen(false)}
         />
-      </Modal>
+      </BasicModal>
     </div>
   );
 };

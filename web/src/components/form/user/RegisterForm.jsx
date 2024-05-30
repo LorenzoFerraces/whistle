@@ -1,7 +1,8 @@
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import './Form.css';
-import { AuthContext } from '../../api/AuthContext';
+import { AuthContext } from '../../../api/AuthContext';
+import { FormButton, SimpleInput } from '../Form';
+import './UserForm.css';
 
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
@@ -41,53 +42,34 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="simple-form">
+    <div className="user-form">
       <div className="element">
         <h3>CREATE YOUR ACCOUNT</h3>
         <form>
           <div>
-            <div>EMAIL</div>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <SimpleInput name={'Email'} value={email} set={setEmail} />
           </div>
           <div>
-            <div>REPEAT EMAIL</div>
-            <input
-              type="text"
+            <SimpleInput
+              name={'Repeat Email'}
               value={repeatEmail}
-              onChange={(e) => setRepeatEmail(e.target.value)}
+              set={setRepeatEmail}
             />
           </div>
           <div>
-            <div>PASSWORD</div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <SimpleInput name={'Password'} value={password} set={setPassword} />
           </div>
           <div>
-            <div>REPEAT PASSWORD</div>
-            <input
-              type="password"
+            <SimpleInput
+              name={'Repeat Passoword'}
               value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
+              set={setRepeatPassword}
             />
           </div>
           <div>
-            <div>USERNAME</div>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+            <SimpleInput name={'Username'} value={username} set={setUsername} />
           </div>
-          <button type="submit" onClick={handleSubmit}>
-            Register
-          </button>
+          <FormButton text={'Register'} onClick={handleSubmit} />
         </form>
         <div className="nav">
           Already Have An Account?{' '}

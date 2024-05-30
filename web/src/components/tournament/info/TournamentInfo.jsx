@@ -1,6 +1,6 @@
 import { SlCalender } from 'react-icons/sl';
 import { FaCircle } from 'react-icons/fa6';
-import { SlTrophy, SlLocationPin } from 'react-icons/sl';
+import { SlTrophy, SlLocationPin, SlLock } from 'react-icons/sl';
 import './TournamentInfo.css';
 
 const TournamentInfo = ({ tournament }) => {
@@ -10,7 +10,10 @@ const TournamentInfo = ({ tournament }) => {
         <img src={tournament.imageURL} alt="Tournament" />
       </div>
       <div className="info">
-        <h2> {tournament.name}</h2>
+        <div>
+          <span className="name">{tournament.name}</span>
+          {tournament.privacy == 'Private' ? <SlLock /> : null}
+        </div>
         <p> {tournament.description}</p>
         <div>
           <SlTrophy color="grey" />

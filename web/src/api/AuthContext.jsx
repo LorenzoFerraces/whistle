@@ -186,6 +186,7 @@ export const AuthProvider = ({ children }) => {
     sport,
     imageURL,
     location,
+    privacy,
     setTournament,
     setSucces,
   ) => {
@@ -204,6 +205,7 @@ export const AuthProvider = ({ children }) => {
         sport,
         imageURL,
         location,
+        privacy,
       })
       .then((response) => {
         const data = response.data;

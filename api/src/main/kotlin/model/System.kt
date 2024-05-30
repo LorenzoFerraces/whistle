@@ -53,6 +53,7 @@ class System(private val dataManager: DataManager) {
         } catch (e: IllegalArgumentException) {
             throw InvalidSportException()
         }
+
         val locationEnum = Locations.fromString(draft.location) ?: throw InvalidLocationException()
         val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
         val imageUrl = if (draft.imageURL.isBlank()) defaultImage else draft.imageURL
@@ -69,6 +70,7 @@ class System(private val dataManager: DataManager) {
             1,
             mutableListOf<Game>(),
             Status.Open,
+            Privacy.valueOf(draft.privacy),
             SimpleUser(user.id, user.username),
         )
         tournaments.add(tournament)
@@ -241,7 +243,8 @@ class System(private val dataManager: DataManager) {
         val teams = generateRandomTeams()
         val sport = Sports.values().random().name
         val location = Locations.values().random().name
-        return DraftTournament(name, description, date, teams, sport, imageUrl, location)
+        val privacy = Privacy.values().random().name
+        return DraftTournament(name, description, date, teams, sport, imageUrl, location, privacy)
     }
 
     private fun generateRandomDate(): String {

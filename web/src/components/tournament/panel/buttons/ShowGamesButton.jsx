@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import GameList from '../../../gameList/GameList';
-import Modal from '../../../modal/basic/BasicModal';
+
 import './TournamentPanelButton.css';
+import BasicModal from '../../../modal/basic/BasicModal';
 
 const ShowGamesButton = ({
   tournamentId,
@@ -16,7 +17,7 @@ const ShowGamesButton = ({
   return (
     <div className="panel-button">
       <button onClick={() => setModalIsOpen(true)}>Results</button>
-      <Modal
+      <BasicModal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
         header={'GAMES'}
@@ -29,7 +30,7 @@ const ShowGamesButton = ({
           tournamentStatus={tournamentStatus}
           tournamentUserId={tournamentUserId}
         />
-      </Modal>
+      </BasicModal>
     </div>
   );
 };

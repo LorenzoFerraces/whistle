@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './routes/Login';
 import Register from './routes/Register';
-import Create from './routes/Create';
 import Tournaments from './routes/Tournaments';
 import Tournament from './routes/tournament/Tournament';
 import { Private } from './routes/Private';
@@ -27,14 +26,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<Search />} />
-        <Route
-          path="/create"
-          element={
-            <Private>
-              <Create />
-            </Private>
-          }
-        />
         <Route
           path="/tournaments"
           element={

@@ -1,0 +1,24 @@
+.tournament-form {
+  margin: 10px;
+}
+
+.tournament-form .row {
+  display: flex;
+  gap: 10px;
+}
+
+.tournament-form .big-section {
+  flex: 1;
+}
+
+.tournament-form .button-section {
+  align-content: flex-end;
+}
+
+.tournament-form .small-section {
+  width: 30%;
+}
+
+.tournament-form .private-section {
+  width: 13%;
+}

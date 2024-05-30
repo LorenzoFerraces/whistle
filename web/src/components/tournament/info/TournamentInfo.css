@@ -8,9 +8,13 @@
   padding: 10px;
 }
 
-#tournament-info .info h2 {
+#tournament-info .info .name {
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.7em;
+  margin-right: 5px;
+  color: var(--text);
 }
 
 #tournament-info .info span {

@@ -19,6 +19,7 @@ class DraftTournament(
     val sport: String,
     val imageURL: String,
     val location: String,
+    val privacy: String,
 )
 
 class DraftGame(

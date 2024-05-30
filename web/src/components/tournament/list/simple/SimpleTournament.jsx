@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import './SimpleTournament.css';
-import { SlCalender, SlTrophy, SlLocationPin } from 'react-icons/sl';
+import { SlCalender, SlTrophy, SlLocationPin, SlLock } from 'react-icons/sl';
 import { FaCircle } from 'react-icons/fa6';
 
 const SimpleTournament = ({ tournament }) => {
@@ -18,6 +18,7 @@ const SimpleTournament = ({ tournament }) => {
           <div className="info">
             <NavLink to={`/tournament/${tournament.id}`}>
               <span className="name">{tournament.name}</span>
+              {tournament.privacy == 'Private' ? <SlLock /> : null}
             </NavLink>
             <div>{tournament.description}</div>
             <div className="fotter">

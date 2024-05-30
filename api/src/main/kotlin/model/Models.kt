@@ -25,6 +25,7 @@ class Tournament(
     var nextGameID: Int,
     var games: MutableList<Game>,
     var status: Status,
+    var privacy: Privacy,
     val user: SimpleUser,
 )
 
@@ -80,6 +81,10 @@ enum class Locations {
 
 enum class Status{
     Open, Close
+}
+
+enum class Privacy{
+    Public, Private
 }
 
 enum class Sports {

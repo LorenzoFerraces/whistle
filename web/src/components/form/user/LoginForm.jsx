@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { AuthContext } from '../../api/AuthContext';
+import { AuthContext } from '../../../api/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
-import './Form.css';
-
+import { FormButton, SimpleInput } from '../Form';
+import './UserForm.css';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,29 +27,21 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="simple-form">
+    <div className="user-form">
       <div className="element">
         <h3>SIGN IN</h3>
         <form>
           <div>
-            <div>SIGN IN WITH EMAIL</div>
-            <input
-              type="text"
+            <SimpleInput
+              name={'Sign in with email'}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              set={setEmail}
             />
           </div>
           <div>
-            <div>PASSWORD</div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <SimpleInput name={'Password'} value={password} set={setPassword} />
           </div>
-          <button type="submit" onClick={handleSubmit}>
-            Log In
-          </button>
+          <FormButton text={'Log In'} onClick={handleSubmit} />
         </form>
         <div className="nav">
           First Time in Whistle?{' '}
