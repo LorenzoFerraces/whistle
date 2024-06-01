@@ -87,6 +87,39 @@ class System(private val dataManager: DataManager) {
         return tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
     }
 
+    fun updateTournament(tournamentID: String, draftTournament: DraftTournament): Tournament {
+        var tournament = getTournament(tournamentID)
+        val sportEnum = try {
+            Sports.valueOf(draftTournament.sport)
+        } catch (e: IllegalArgumentException) {
+            throw InvalidSportException()
+        }
+        val existingTeamNames = tournament.teams.map { it.name }.toSet()
+        val newTeams = mutableListOf<Team>()
+        newTeams.addAll(tournament.teams)
+
+        for (teamName in draftTournament.teams) {
+            if (!existingTeamNames.contains(teamName)) {
+                newTeams.add(Team(name = teamName))
+            }
+        }
+        val locationEnum = Locations.fromString(draftTournament.location) ?: throw InvalidLocationException()
+        val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
+        val imageUrl = if (draftTournament.imageURL.isBlank()) defaultImage else draftTournament.imageURL
+
+        tournament.name = draftTournament.name
+        tournament.description = draftTournament.description
+        tournament.teams = newTeams
+        tournament.sport = sportEnum
+        tournament.date = draftTournament.date
+        tournament.location = locationEnum
+        tournament.imageURL = imageUrl
+        Status.Open
+        tournament.privacy = Privacy.valueOf(draftTournament.privacy)
+        dataManager.saveData(this)
+        return tournament
+    }
+
     fun removeTournament(tournamentId: String, userId: String) {
         val tournament = tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
         if (tournament.user.id != userId) throw UserException("You are not authorized to modify this tournament")
@@ -312,6 +345,8 @@ class System(private val dataManager: DataManager) {
 
         return filteredByName
     }
+
+
 
 
 }

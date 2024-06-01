@@ -7,6 +7,7 @@
 .team-list thead th {
   background-color: var(--accent);
   color: #ffffff;
+  position: sticky;
 }
 
 .team-list th,

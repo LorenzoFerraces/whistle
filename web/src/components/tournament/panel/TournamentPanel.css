@@ -1,5 +1,7 @@
 .tournament-panel {
   margin-right: 10px;
+  width: 80%;
+  margin: auto;
 }
 
 .tournament-panel .top-section {

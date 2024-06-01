@@ -22,3 +22,16 @@
 .tournament-form .private-section {
   width: 13%;
 }
+.tournament-form .teams {
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  max-height: 200px; /* Define el tamaño máximo de la lista */
+  overflow-y: auto;
+}
+
+.tournament-form .team-item {
+  background-color: var(--c2);
+  padding: 5px;
+}

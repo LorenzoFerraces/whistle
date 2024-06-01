@@ -30,7 +30,11 @@ const Tournament = () => {
   return (
     <div id="tournament" className="element main">
       <div className="izq">
-        <TournamentInfo tournamentId={tournamentId} tournament={tournament} />
+        <TournamentInfo
+          tournamentId={tournamentId}
+          tournament={tournament}
+          setTournament={setTournament}
+        />
         <TournamentPanel
           tournamentId={tournamentId}
           tournament={tournament}

@@ -3,9 +3,12 @@
 }
 
 #tournament .izq {
-  flex-basis: 20%;
+  flex-basis: 25%;
+  border-right: 1px solid var(--line);
+  padding-right: 10px;
 }
 
 #tournament .der {
-  flex-basis: 80%;
+  flex-basis: 75%;
+  padding-left: 10px;
 }

@@ -18,7 +18,7 @@ class Tournament(
     var name: String,
     var description: String,
     var sport: Sports,
-    val date: String,
+    var date: String,
     var location: Locations,
     var imageURL: String,
     var teams: List<Team>,

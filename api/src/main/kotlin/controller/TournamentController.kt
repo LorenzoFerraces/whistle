@@ -41,6 +41,19 @@ class TournamentController(private var system: System, private var tokenControll
         }
     }
 
+    fun putTournament(context: Context){
+        tokenController.validateAndProcessBody<DraftTournament>(context) { draftTournament ->
+            try {
+                val tournamentID = context.pathParam("id")
+                val tournament = system.updateTournament(tournamentID, draftTournament)
+                context.json(TournamentDTO(tournament))
+
+            } catch (e: NotTournamentFoundException) {
+                tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "Tournament not found")
+            }
+        }
+    }
+
     fun deleteTournament(context: Context) {
         try{
             val id = context.pathParam("id")

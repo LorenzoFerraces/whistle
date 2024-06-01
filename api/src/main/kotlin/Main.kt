@@ -60,6 +60,7 @@ class Api {
                 ApiBuilder.path("{id}") {
                     ApiBuilder.get(tournamentController::getTournament, Roles.ANYONE)
                     ApiBuilder.delete(tournamentController::deleteTournament, Roles.USER)
+                    ApiBuilder.put(tournamentController::putTournament, Roles.USER)
                     ApiBuilder.path("status") {
                         ApiBuilder.post(tournamentController::closeGame, Roles.USER)
                     }

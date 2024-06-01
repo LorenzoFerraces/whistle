@@ -1,7 +1,5 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../../api/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import './TournamentForm.css';
 import {
   FormButton,
   FormSubmitButton,
@@ -10,24 +8,38 @@ import {
   ToggleSwitch,
 } from '../Form';
 
-const TournamentForm = () => {
-  const [tournamentName, setTournamentName] = useState('');
-  const [sport, setSport] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
+const TournamentEditForm = ({
+  tournamentId,
+  oldTournament,
+  setTournament,
+  close,
+}) => {
+  const [tournamentName, setTournamentName] = useState(oldTournament.name);
+  const [sport, setSport] = useState(oldTournament.sport);
+  const [location, setLocation] = useState(oldTournament.location);
+  const [description, setDescription] = useState(oldTournament.description);
+  const [selectedDate, setSelectedDate] = useState(oldTournament.date);
   const [teamName, setTeamName] = useState('');
-  const [teamsNames, setTeamsNames] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [imageURL, setimageURL] = useState('');
+  const [teams, setTeams] = useState(oldTournament.teams);
+  const [imageURL, setimageURL] = useState(oldTournament.imageURL);
   const [showImageInput, setShowImageInput] = useState(false);
-  const navigate = useNavigate();
-  const { setError, postTornament, sports, locations } =
-    useContext(AuthContext);
+  const { setError, putTornament, sports, locations } = useContext(AuthContext);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   const handleToggleChange = () => {
     setIsSwitchOn(!isSwitchOn);
+  };
+
+  const addTeam = () => {
+    if (teamName.trim() === '') return;
+    if (
+      teams.find((team) => team.name.toLowerCase() === teamName.toLowerCase())
+    ) {
+      setError('Team name already exists.');
+      return;
+    }
+    setTeams([...teams, { name: teamName }]);
+    setTeamName('');
   };
 
   const handleSubmit = (e) => {
@@ -52,9 +64,9 @@ const TournamentForm = () => {
     if (isSwitchOn) {
       privacy = 'Private';
     }
-    console.log(privacy);
+    const teamsNames = teams.map((team) => team.name);
 
-    postTornament(
+    putTornament(
       tournamentName,
       description,
       selectedDate,
@@ -63,8 +75,10 @@ const TournamentForm = () => {
       imageURL,
       location,
       privacy,
-      navigate,
+      tournamentId,
+      setTournament,
     );
+    close();
   };
 
   const handleDateChange = (selectedDate) => {
@@ -101,19 +115,6 @@ const TournamentForm = () => {
       };
     }
   }
-
-  const addTeam = () => {
-    if (teamName.trim() === '') return;
-    if (
-      teams.find((team) => team.name.toLowerCase() === teamName.toLowerCase())
-    ) {
-      setError('Team name already exists.');
-      return;
-    }
-    setTeams([...teams, { name: teamName }]);
-    setTeamsNames([...teamsNames, teamName]);
-    setTeamName('');
-  };
 
   return (
     <div className="tournament-form">
@@ -196,13 +197,15 @@ const TournamentForm = () => {
         </div>
         <div className="teams">
           {teams.map((team, index) => (
-            <div key={index}>{team.name}</div>
+            <div className="team-item" key={index}>
+              {team.name}
+            </div>
           ))}
         </div>
-        <FormSubmitButton text={'Create'} />
+        <FormSubmitButton text={'Edit'} />
       </form>
     </div>
   );
 };
 
-export default TournamentForm;
+export default TournamentEditForm;

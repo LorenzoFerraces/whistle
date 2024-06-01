@@ -2,17 +2,29 @@ import { SlCalender } from 'react-icons/sl';
 import { FaCircle } from 'react-icons/fa6';
 import { SlTrophy, SlLocationPin, SlLock } from 'react-icons/sl';
 import './TournamentInfo.css';
+import EditTournamentButton from './edit/EditTournamentButton';
+import { useContext } from 'react';
+import { AuthContext } from '../../../api/AuthContext';
 
-const TournamentInfo = ({ tournament }) => {
+const TournamentInfo = ({ tournamentId, tournament, setTournament }) => {
+  const { userInfo } = useContext(AuthContext);
+
   return (
     <div id="tournament-info">
       <div className="image">
         <img src={tournament.imageURL} alt="Tournament" />
       </div>
       <div className="info">
-        <div>
+        <div className="info-header">
+          {userInfo.logged && tournament.user.id == userInfo.id ? (
+            <EditTournamentButton
+              tournamentId={tournamentId}
+              tournament={tournament}
+              setTournament={setTournament}
+            />
+          ) : null}
           <span className="name">{tournament.name}</span>
-          {tournament.privacy == 'Private' ? <SlLock /> : null}
+          {tournament.privacy == 'Private' ? <SlLock size={20} /> : null}
         </div>
         <p> {tournament.description}</p>
         <div>
