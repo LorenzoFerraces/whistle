@@ -72,13 +72,11 @@ const RegisterForm = () => {
                 set={setRepeatEmail}
             />
           </div>
-          <div className="small-section">
-            <SecelectInput
-                name={'Preferred Sport'}
-                list={sports}
-                value={preferredSport}
-                set={setPreferredSport}
-            />
+          <div>
+            <PhoneInputComponent
+                country="AR"
+                value={phone}
+                onChange={setPhone}/>
           </div>
           <div className="small-section">
             <SecelectInput
@@ -88,11 +86,13 @@ const RegisterForm = () => {
                 set={setLocation}
             />
           </div>
-          <div>
-            <PhoneInputComponent
-                country="AR"
-                value={phone}
-                onChange={setPhone}/>
+          <div className="small-section">
+            <SecelectInput
+                name={'Preferred Sport'}
+                list={sports}
+                value={preferredSport}
+                set={setPreferredSport}
+            />
           </div>
           <div>
             <SimpleInput
