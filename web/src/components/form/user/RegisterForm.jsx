@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { isValidPhoneNumber } from 'react-phone-number-input'
 import { AuthContext } from '../../../api/AuthContext';
 import {
   FormButton,
@@ -36,6 +37,10 @@ const RegisterForm = () => {
     if (password != repeatPassword) {
       setError('Password disparity.');
       return;
+    }
+    if (!isValidPhoneNumber(phone)) {
+        setError('Please enter a valid phone number.');
+        return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
