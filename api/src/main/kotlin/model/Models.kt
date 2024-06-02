@@ -4,6 +4,9 @@ class User(
     val id: String,
     val username: String,
     val email: String,
+    val location: Locations,
+    val phone: String,
+    val preferredSport: Sports,
     val password: String,
     val tournaments: MutableList<Tournament>
 )

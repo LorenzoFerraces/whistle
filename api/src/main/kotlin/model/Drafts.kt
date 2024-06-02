@@ -3,6 +3,9 @@ package model
 class DraftUser(
     var email: String,
     var password: String,
+    var preferredSport: String,
+    var location: String,
+    var phone: String,
     var username: String
 )
 
