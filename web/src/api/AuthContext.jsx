@@ -124,11 +124,14 @@ export const AuthProvider = ({ children }) => {
     window.location.href = '/login';
   };
 
-  const postRegister = (email, password, username, navigate) => {
+  const postRegister = (email, preferredSport, location, phone, password, username, navigate) => {
     setError();
     axios
       .post(url + '/register', {
         email,
+        preferredSport,
+        location,
+        phone,
         password,
         username,
       })
