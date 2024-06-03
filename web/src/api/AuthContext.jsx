@@ -176,17 +176,14 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setUserLoad(true));
   };
 
-  const getUser = (id, setUser, setTournaments, setSucces) => {
-    setSucces(false);
+  const getUser = (id, setUser) => {
     setError();
     axios
       .get(url + `/user/${id}`)
       .then((response) => {
         setUser(response.data);
-        setTournaments(response.data.tournaments);
       })
-      .catch((error) => setError(error))
-      .finally(() => setSucces(true));
+      .catch((error) => setError(error));
   };
 
   const postTornament = (

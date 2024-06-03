@@ -1,6 +1,8 @@
 #tournament-list .grid {
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
 #tournament-list .not-found {

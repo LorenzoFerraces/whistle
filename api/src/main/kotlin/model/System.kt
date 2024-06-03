@@ -75,7 +75,7 @@ class System(private val dataManager: DataManager) {
             Privacy.valueOf(draft.privacy),
             SimpleUser(user.id, user.username),
         )
-        tournaments.add(tournament)
+        if(tournaments.add(tournament)) { println("Agrego torneo: "+ tournament.privacy.name)}
         user.tournaments.add(tournament)
         dataManager.saveData(this)
         return tournament

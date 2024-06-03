@@ -9,6 +9,7 @@ import TitleManager from './components/titleManager/TitleManager';
 import Menu from './components/menu/Menu';
 import Search from './routes/Search';
 import Home from './routes/Home';
+import Profile from './routes/Profile';
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
           element={
             <Private>
               <Tournament />
+            </Private>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Private>
+              <Profile />
             </Private>
           }
         />

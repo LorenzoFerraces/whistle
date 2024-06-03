@@ -5,8 +5,7 @@ import FilterTournaments from '../components/filter/FilterTournaments';
 import TournamentList from '../components/tournament/list/TournamentList';
 
 const Tournaments = () => {
-  const [user, setUser] = useState([]);
-  const [success, setSuccess] = useState(false);
+  const [user, setUser] = useState();
   const [tournaments, setTournaments] = useState();
   const { getUser, userInfo, userLoad } = useContext(AuthContext);
 
@@ -15,10 +14,18 @@ const Tournaments = () => {
       if (!userLoad) {
         return;
       }
-      await getUser(userInfo.id, setUser, setTournaments, setSuccess);
+      await getUser(userInfo.id, setUser);
     };
+
     fetchData();
   }, [userLoad, getUser, userInfo]);
+
+  useEffect(() => {
+    if (user) {
+      setTournaments(user.tournaments || []);
+    }
+  }, [user]);
+
   return (
     <>
       <div className="element main">
@@ -36,7 +43,7 @@ const Tournaments = () => {
             <AddTournamentButton />
           </div>
         </div>
-        {tournaments && <TournamentList tournaments={tournaments} />}
+        {user && tournaments && <TournamentList tournaments={tournaments} />}
       </div>
     </>
   );
