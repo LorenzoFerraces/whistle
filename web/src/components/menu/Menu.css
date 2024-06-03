@@ -32,7 +32,11 @@
 #main-menu .center span {
   padding-right: 5px;
   padding-left: 5px;
-  border-right: thin solid gray;
+  border-left: thin solid gray;
+}
+
+#main-menu .center .first {
+  border-left: none;
 }
 
 #main-menu span:hover {

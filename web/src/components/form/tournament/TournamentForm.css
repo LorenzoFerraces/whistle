@@ -27,7 +27,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3px;
-  max-height: 200px; /* Define el tamaño máximo de la lista */
+  max-height: 200px;
   overflow-y: auto;
 }
 

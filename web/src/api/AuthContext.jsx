@@ -124,7 +124,15 @@ export const AuthProvider = ({ children }) => {
     window.location.href = '/login';
   };
 
-  const postRegister = (email, preferredSport, location, phone, password, username, navigate) => {
+  const postRegister = (
+    email,
+    preferredSport,
+    location,
+    phone,
+    password,
+    username,
+    navigate,
+  ) => {
     setError();
     axios
       .post(url + '/register', {
@@ -376,6 +384,28 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => setError(error));
   };
 
+  const getFeaturedTournaments = (setTournament) => {
+    setError();
+    axios
+      .get(url + `/tournament/featured`)
+      .then((response) => {
+        setTournament(response.data);
+      })
+      .catch((error) => setError(error));
+  };
+
+  const getSportFeaturedTournaments = (setSport, setTournament) => {
+    setError();
+    var sport = sports[Math.floor(Math.random() * sports.length)];
+    axios
+      .get(url + `/tournament/featured/${sport}`)
+      .then((response) => {
+        setTournament(response.data);
+        setSport(sport);
+      })
+      .catch((error) => setError(error));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -398,6 +428,8 @@ export const AuthProvider = ({ children }) => {
         DeleteTournament,
         getTournaments,
         getTournamentsSearch,
+        getFeaturedTournaments,
+        getSportFeaturedTournaments,
       }}
     >
       <ToastContainer />

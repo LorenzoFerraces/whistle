@@ -85,6 +85,17 @@ class System(private val dataManager: DataManager) {
         return tournaments.filter { it.privacy == Privacy.Public }
     }
 
+    fun getFeaturedTournaments(): List<Tournament> {
+        var publicTournaments = tournaments.filter { it.privacy == Privacy.Public }
+        return publicTournaments.take(10)
+    }
+
+    fun getFeaturedSportTournaments(sport: String): List<Tournament> {
+        var publicTournaments = tournaments.filter { it.privacy == Privacy.Public }
+        var sportTournament = publicTournaments.filter { it.sport == Sports.valueOf(sport) }
+        return sportTournament.take(10)
+    }
+
     fun getTournament(tournamentId: String): Tournament {
         return tournaments.find { it.id == tournamentId } ?: throw NotTournamentFoundException()
     }
@@ -254,8 +265,8 @@ class System(private val dataManager: DataManager) {
     private fun addUsers() {
         val availableUsers = usersGEN.toMutableList()
         for (user in availableUsers) {
-            val username = user[0]
-            val email = user[1]
+            val email = user[0]
+            val username = user[1]
             val password = user[2]
             var user = generateUniqueDraftUser(username, email, password)
             addUser(user)
@@ -289,12 +300,11 @@ class System(private val dataManager: DataManager) {
         return DraftTournament(name, description, date, teams, sport, imageUrl, location, privacy)
     }
 
-    private fun generateUniqueDraftUser(username:String, email: String, password: String): DraftUser {
+    private fun generateUniqueDraftUser(username: String, email: String, password: String): DraftUser {
         val sport = Sports.values().random().name
         val location = Locations.values().random().name
         val phone = "+11234567890"
-        val draftUser = DraftUser(email, password, sport, location, phone, username)
-        return draftUser
+        return DraftUser(email, password, sport, location, phone, username)
     }
 
     private fun generateRandomDate(): String {
@@ -360,8 +370,5 @@ class System(private val dataManager: DataManager) {
 
         return filteredByName
     }
-
-
-
 
 }

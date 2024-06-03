@@ -128,5 +128,26 @@ class TournamentController(private var system: System, private var tokenControll
         }
     }
 
+    fun getFeaturedTournaments(context: Context) {
+        var tournaments = system.getFeaturedTournaments()
+        var tournamentsDTO = mutableListOf<TournamentDTO>()
+        for(tournament in tournaments){
+            var tournamentDTO = TournamentDTO(tournament)
+            tournamentsDTO.add(tournamentDTO)
+        }
+        context.json(tournamentsDTO)
+    }
+
+    fun getFeaturedSportTournaments(context: Context) {
+        val sport = context.pathParam("sport")
+        var tournaments = system.getFeaturedSportTournaments(sport)
+        var tournamentsDTO = mutableListOf<TournamentDTO>()
+        for(tournament in tournaments){
+            var tournamentDTO = TournamentDTO(tournament)
+            tournamentsDTO.add(tournamentDTO)
+        }
+        context.json(tournamentsDTO)
+    }
+
 
 }

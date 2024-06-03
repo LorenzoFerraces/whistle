@@ -1,3 +1,8 @@
+.team-list-container {
+  max-height: 45rem;
+  overflow-y: auto;
+}
+
 .team-list {
   border-collapse: collapse;
   width: 100%;
@@ -7,6 +12,7 @@
 .team-list thead th {
   background-color: var(--accent);
   color: #ffffff;
+  top: 0;
   position: sticky;
 }
 

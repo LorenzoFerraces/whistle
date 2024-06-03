@@ -15,12 +15,22 @@ const Menu = () => {
         </div>
       </NavLink>
       <div className="center">
+        <NavLink to="/">
+          <span className="first">HOME</span>
+        </NavLink>
         <NavLink to="/search">
           <span>SEARCH</span>
         </NavLink>
-        <NavLink to="/tournaments">
-          <span>MY TOURNAMENTS</span>
-        </NavLink>
+        {userInfo.logged && (
+          <>
+            <NavLink to="/tournaments">
+              <span>MY TOURNAMENTS</span>
+            </NavLink>
+            <NavLink to="/profile">
+              <span>PROFILE</span>
+            </NavLink>
+          </>
+        )}
       </div>
       <div className="right">
         {userInfo.logged ? (

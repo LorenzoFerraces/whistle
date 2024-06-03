@@ -8,6 +8,7 @@ import NotFound from './routes/NotFound';
 import TitleManager from './components/titleManager/TitleManager';
 import Menu from './components/menu/Menu';
 import Search from './routes/Search';
+import Home from './routes/Home';
 
 function App() {
   return (
@@ -15,14 +16,7 @@ function App() {
       <TitleManager />
       <Menu />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Private>
-              <Tournaments />
-            </Private>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<Search />} />
