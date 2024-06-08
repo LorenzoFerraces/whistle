@@ -1,5 +1,5 @@
 import './Form.css';
-import PhoneInput from 'react-phone-number-input/input'
+import PhoneInput from 'react-phone-number-input/input';
 
 export const SimpleInput = ({ name, value, set, type = 'text' }) => (
   <div className="input-container">
@@ -60,8 +60,8 @@ export const FormButton = ({ name, text, onClick }) => (
   </div>
 );
 export const PhoneInputComponent = ({ country, value, onChange }) => (
-    <div className="input-container">
-    <div className="input-label">Phone</div>
+  <div className="input-container">
+    <div className="input-label">Phone *</div>
     <PhoneInput
       country={country}
       value={value}

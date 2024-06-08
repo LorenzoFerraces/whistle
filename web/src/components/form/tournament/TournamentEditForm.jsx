@@ -122,14 +122,14 @@ const TournamentEditForm = ({
         <div className="row">
           <div className="big-section">
             <SimpleInput
-              name={'Name*'}
+              name={'Name *'}
               value={tournamentName}
               set={setTournamentName}
             />
           </div>
           <div className="small-section">
             <SecelectInput
-              name={'Sport'}
+              name={'Sport *'}
               list={sports}
               value={sport}
               set={setSport}
@@ -139,14 +139,14 @@ const TournamentEditForm = ({
         <div className="row">
           <div className="big-section">
             <SimpleInput
-              name={'Description*'}
+              name={'Description *'}
               value={description}
               set={setDescription}
             />
           </div>
           <div className="small-section">
             <SecelectInput
-              name={'Province'}
+              name={'Province *'}
               list={locations}
               value={location}
               set={setLocation}
@@ -156,7 +156,7 @@ const TournamentEditForm = ({
         <div className="row">
           <div className="big-section">
             <SimpleInput
-              name={'Date*'}
+              name={'Date *'}
               type={'date'}
               value={selectedDate}
               set={handleDateChange}
@@ -188,7 +188,7 @@ const TournamentEditForm = ({
         </div>
         <div className="row">
           <div className="big-section">
-            <SimpleInput name={'Teams*'} value={teamName} set={setTeamName} />
+            <SimpleInput name={'Teams *'} value={teamName} set={setTeamName} />
           </div>
 
           <div className="button-section">

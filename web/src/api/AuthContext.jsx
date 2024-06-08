@@ -131,9 +131,11 @@ export const AuthProvider = ({ children }) => {
     phone,
     password,
     username,
+    imageURL,
     navigate,
   ) => {
     setError();
+
     axios
       .post(url + '/register', {
         email,
@@ -142,6 +144,7 @@ export const AuthProvider = ({ children }) => {
         phone,
         password,
         username,
+        imageURL,
       })
       .then((response) => {
         const token = response.headers.authorization;
@@ -154,6 +157,10 @@ export const AuthProvider = ({ children }) => {
           name: data.name,
         });
         setUserLoad(true);
+        if (!imageURL || imageURL === '') {
+          imageURL =
+            'https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png';
+        }
       })
       .catch((error) => setError(error))
       .finally(() => navigate('/tournaments'));

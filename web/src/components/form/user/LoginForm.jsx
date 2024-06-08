@@ -33,7 +33,7 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <SimpleInput
-              name={'Sign in with email'}
+              name={'Sign in with email *'}
               value={email}
               set={setEmail}
             />
@@ -41,7 +41,7 @@ const LoginForm = () => {
           <div>
             <SimpleInput
               type={'password'}
-              name={'Password'}
+              name={'Password *'}
               value={password}
               set={setPassword}
             />

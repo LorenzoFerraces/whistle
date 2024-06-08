@@ -4,7 +4,7 @@ const UserInfo = ({ user }) => {
   return (
     <div className="user-info">
       <div className="image-container">
-        <img src="https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png" />
+        <img src={user.imageURL} />
       </div>
       <div className="info">
         <div className="username">{user.username}</div>
@@ -29,5 +29,7 @@ const UserInfo = ({ user }) => {
     </div>
   );
 };
+
+// user.imageURL
 
 export default UserInfo;
