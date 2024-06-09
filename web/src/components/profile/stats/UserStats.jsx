@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import './UserStats.css';
 
 const UserStats = ({ tournaments }) => {
   const publicTournamentsCount = useMemo(() => {
@@ -19,10 +20,16 @@ const UserStats = ({ tournaments }) => {
   }, [tournaments]);
 
   return (
-    <div>
+    <div className="user-stats">
       <h2>STATS</h2>
-      <p>Public Tournaments: {publicTournamentsCount}</p>
-      <p>Most Organized Sport: {mostOrganizedSport}</p>
+      <p>
+        Public Tournaments:{' '}
+        <span className="highlight">{publicTournamentsCount}</span>
+      </p>
+      <p>
+        Most Organized Sport:{' '}
+        <span className="highlight">{mostOrganizedSport}</span>
+      </p>
     </div>
   );
 };
