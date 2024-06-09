@@ -6,6 +6,7 @@ class DraftUser(
     var preferredSport: String,
     var location: String,
     var phone: String,
+    var imageURL: String,
     var username: String
 )
 

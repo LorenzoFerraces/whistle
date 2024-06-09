@@ -25,7 +25,7 @@ class System(private val dataManager: DataManager) {
         if (users.any { it.email == draft.email }) throw EmailException()
         val location = Locations.fromString(draft.location) ?: throw InvalidLocationException()
         val sport = Sports.valueOf(draft.preferredSport)
-        val user = User(idGenerator.getUserId(), draft.username, draft.email, location, draft.phone, sport, draft.password, mutableListOf())
+        val user = User(idGenerator.getUserId(), draft.username, draft.email, location, draft.phone, sport, draft.password,draft.imageURL, mutableListOf())
         users.add(user)
         dataManager.saveData(this)
         return user
@@ -304,7 +304,8 @@ class System(private val dataManager: DataManager) {
         val sport = Sports.values().random().name
         val location = Locations.values().random().name
         val phone = "+11234567890"
-        return DraftUser(email, password, sport, location, phone, username)
+        val image = "https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png"
+        return DraftUser(email, password, sport, location, phone, image,username)
     }
 
     private fun generateRandomDate(): String {

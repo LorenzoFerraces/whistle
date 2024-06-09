@@ -8,6 +8,7 @@ class User(
     val phone: String,
     val preferredSport: Sports,
     val password: String,
+    val imageURL: String,
     val tournaments: MutableList<Tournament>
 )
 
