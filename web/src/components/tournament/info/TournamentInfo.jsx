@@ -1,6 +1,6 @@
 import { SlCalender } from 'react-icons/sl';
 import { FaCircle } from 'react-icons/fa6';
-import { SlTrophy, SlLocationPin, SlLock } from 'react-icons/sl';
+import { SlTrophy, SlLocationPin, SlLock, SlUser } from 'react-icons/sl';
 import './TournamentInfo.css';
 import EditTournamentButton from './edit/EditTournamentButton';
 import { useContext } from 'react';
@@ -27,6 +27,12 @@ const TournamentInfo = ({ tournamentId, tournament, setTournament }) => {
           {tournament.privacy == 'Private' ? <SlLock size={20} /> : null}
         </div>
         <p> {tournament.description}</p>
+        <div className="profile-link">
+          <SlUser color="grey"/>
+          <a href={`/profile/${tournament.user.id}`}>
+          <span>{tournament.user.username}</span>
+          </a>
+        </div>
         <div>
           <SlTrophy color="grey" />
           <span>{tournament.sport}</span>
