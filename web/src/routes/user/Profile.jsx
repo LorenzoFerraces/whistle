@@ -3,7 +3,7 @@ import { AuthContext } from '../../api/AuthContext';
 import UserProfile from '../../components/profile/UserProfile';
 import {useParams} from "react-router-dom";
 
-const Profile = () => {
+const USProfile = () => {
   const { userId } = useParams();
   const [user, setUser] = useState();
   const [success, setSuccess] = useState(false);
@@ -12,7 +12,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       userId &&
-      (await getUser(userId, setUser));
+      (await getUser(userId, setUser, setSuccess));
     };
     fetchData();
     if (success) {
@@ -27,4 +27,4 @@ const Profile = () => {
   return <>{user && <UserProfile user={user} />}</>;
 };
 
-export default Profile;
+export default USProfile;

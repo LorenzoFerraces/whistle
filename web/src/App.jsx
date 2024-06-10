@@ -10,6 +10,7 @@ import Menu from './components/menu/Menu';
 import Search from './routes/Search';
 import Home from './routes/Home';
 import Profile from './routes/Profile';
+import UserProfile from './routes/user/Profile';
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
             path="/profile/:userId"
             element={
                 <Private>
-                    <Profile />
+                    <UserProfile />
                 </Private>
             }
         />
