@@ -45,6 +45,14 @@ function App() {
             </Private>
           }
         />
+        <Route
+            path="/profile/:userId"
+            element={
+                <Private>
+                    <Profile />
+                </Private>
+            }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
