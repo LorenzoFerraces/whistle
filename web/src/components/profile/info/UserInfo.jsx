@@ -4,7 +4,7 @@ import {useContext} from "react";
 import {AuthContext} from "../../../api/AuthContext.jsx";
 import EditProfileButton from "./edit/EditProfileButton.jsx";
 
-const UserInfo = ({ userId, user, setUser }) => {
+const UserInfo = ({ user, setUser }) => {
   const { userInfo } = useContext(AuthContext);
   return (
       <div className="user-info">
@@ -34,7 +34,7 @@ const UserInfo = ({ userId, user, setUser }) => {
           <div className="edit-profile0-button">
               {userInfo.logged && userInfo.id == user.id ? (
                   <EditProfileButton
-                      userId={userId}
+                      userId={userInfo.id}
                       userInfo={user}
                       setUserInfo={setUser}
                   />

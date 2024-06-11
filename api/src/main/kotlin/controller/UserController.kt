@@ -62,8 +62,8 @@ class UserController(private var system: System, private var tokenController: To
     fun putUser(context: Context) {
         tokenController.validateAndProcessBody<UpdateUser>(context) { updateUser ->
             try {
-                val userId = context.pathParam("userId")
-                val user = system.updateUser(userId, updateUser)
+                val id = context.pathParam("id")
+                val user = system.updateUser(id, updateUser)
                 context.json(UserDTO(user))
             } catch (e: UserNotFoundException) {
                 tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "User not found")

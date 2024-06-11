@@ -5,15 +5,16 @@ import {
   FormSubmitButton,
   SecelectInput,
   SimpleInput,
-  ToggleSwitch,
 } from '../Form.jsx';
+// import './UserForm.css';
+
 
 const ProfileEditForm = ({
   userId,
   oldUserInfo,
-  setUserInfo,
   close,
 }) => {
+  const [ id, setId ] = useState(userId);
   const [email, setEmail] = useState(oldUserInfo.email);
   const [preferredSport, setPreferredSport] = useState(oldUserInfo.sport);
   const [location, setLocation] = useState(oldUserInfo.location);
@@ -39,8 +40,9 @@ const ProfileEditForm = ({
       return;
     }
 
+    console.log("id: " + id);
     putUserInfo(
-      userId,
+      id,
       email,
       preferredSport,
       location,
@@ -50,6 +52,8 @@ const ProfileEditForm = ({
     );
     close();
   };
+
+
 
   const handleImageUrlChange = (url) => {
     checkIfImageExists(url, (isValidUrl) => {

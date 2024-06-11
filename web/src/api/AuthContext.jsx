@@ -167,7 +167,7 @@ export const AuthProvider = ({ children }) => {
   };
 
     const putUserInfo = (
-        userId,
+        id,
         email,
         preferredSport,
         location,
@@ -179,11 +179,11 @@ export const AuthProvider = ({ children }) => {
         setError();
         if (!imageURL || imageURL === '') {
             imageURL =
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s';
+                'https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png';
         }
         axios
-            .put(url + `/user/${userId}`, {
-                userId,
+            .put(url + `/user/${id}`, {
+                id,
                 email,
                 preferredSport,
                 location,
@@ -195,7 +195,7 @@ export const AuthProvider = ({ children }) => {
                 user = response.data;
             })
             .catch((error) => setError(error))
-            .finally(() => setUserInfo(user));
+            .finally(() => setUserLoad(user));
     };
 
   const getCurrentUser = () => {
