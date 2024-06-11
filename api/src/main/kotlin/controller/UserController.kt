@@ -59,6 +59,22 @@ class UserController(private var system: System, private var tokenController: To
         }
     }
 
+    fun putUser(context: Context) {
+        tokenController.validateAndProcessBody<UpdateUser>(context) { updateUser ->
+            try {
+                val userId = context.pathParam("userId")
+                val user = system.updateUser(userId, updateUser)
+                context.json(UserDTO(user))
+            } catch (e: UserNotFoundException) {
+                tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "User not found")
+            } catch (e: UsernameException) {
+                tokenController.errorResponse(context, HttpStatus.BAD_REQUEST, "Username in use")
+            } catch (e: EmailException) {
+                tokenController.errorResponse(context, HttpStatus.BAD_REQUEST, "Email in use")
+            }
+        }
+    }
+
     fun getUserTournamentsSearch(context: Context) {
         try {
             val userId = context.pathParam("id")

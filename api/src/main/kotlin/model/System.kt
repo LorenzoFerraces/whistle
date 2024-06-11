@@ -37,6 +37,29 @@ class System(private val dataManager: DataManager) {
         return users.find { it.id == userId } ?: throw UserNotFoundException()
     }
 
+    fun updateUser(userId: String, updateUser: UpdateUser): User {
+        val user = getUser(userId)
+        if (users.any { it.username == updateUser.username && it.id != userId }) throw UsernameException()
+        if (users.any { it.email == updateUser.email && it.id != userId }) throw EmailException()
+        val location = Locations.fromString(updateUser.location) ?: throw InvalidLocationException()
+        val sportEnum = try {
+            Sports.valueOf(updateUser.preferredSport)
+        } catch (e: IllegalArgumentException) {
+            throw InvalidSportException()
+        }
+        val defaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s"
+        val imageUrl = if (updateUser.imageURL.isBlank()) defaultImage else updateUser.imageURL
+
+        user.email = updateUser.email
+        user.username = updateUser.username
+        user.location = location
+        user.phone = updateUser.phone
+        user.preferredSport = sportEnum
+        user.imageURL = imageUrl
+        dataManager.saveData(this)
+        return user
+    }
+
     // Tournaments
     fun addTournament(userId: String, draft: DraftTournament): Tournament {
         val normalizedTeams = draft.teams.map { it.lowercase() }
@@ -371,5 +394,7 @@ class System(private val dataManager: DataManager) {
 
         return filteredByName
     }
+
+
 
 }

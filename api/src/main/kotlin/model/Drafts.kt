@@ -10,6 +10,16 @@ class DraftUser(
     var username: String
 )
 
+class UpdateUser(
+    var id: String,
+    var email: String,
+    var preferredSport: String,
+    var location: String,
+    var phone: String,
+    var imageURL: String,
+    var username: String
+)
+
 class DraftLogin(
     var email: String,
     var password: String

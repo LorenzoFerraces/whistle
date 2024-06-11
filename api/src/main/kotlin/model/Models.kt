@@ -2,13 +2,13 @@ package model
 
 class User(
     val id: String,
-    val username: String,
-    val email: String,
-    val location: Locations,
-    val phone: String,
-    val preferredSport: Sports,
+    var username: String,
+    var email: String,
+    var location: Locations,
+    var phone: String,
+    var preferredSport: Sports,
     val password: String,
-    val imageURL: String,
+    var imageURL: String,
     val tournaments: MutableList<Tournament>
 )
 
