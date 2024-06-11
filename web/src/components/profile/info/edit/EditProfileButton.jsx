@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import BasicModal from '../../../modal/basic/BasicModal';
-import TournamentEditForm from '../../../form/tournament/TournamentEditForm';
-import './EditTournamentButton.css';
+import BasicModal from '../../../modal/basic/BasicModal.jsx';
+import TournamentEditForm from '../../../form/tournament/TournamentEditForm.jsx';
+import '../../../tournament/info/edit/EditTournamentButton.css';
 import { FaRegEdit } from 'react-icons/fa';
+import ProfileEditForm from "../../../form/user/ProfileEditForm.jsx";
 
 const EditProfileButton = ({ userId, userInfo, setUserInfo }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);

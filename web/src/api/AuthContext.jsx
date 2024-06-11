@@ -166,6 +166,38 @@ export const AuthProvider = ({ children }) => {
       .finally(() => navigate('/tournaments'));
   };
 
+    const putUserInfo = (
+        userId,
+        email,
+        preferredSport,
+        location,
+        phone,
+        imageURL,
+        username,
+    ) => {
+        var user;
+        setError();
+        if (!imageURL || imageURL === '') {
+            imageURL =
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGME2VivHFEZWJDwVWGUfxtjSGg78t58nNkx4Y3eBQUw&s';
+        }
+        axios
+            .put(url + `/user/${userId}`, {
+                userId,
+                email,
+                preferredSport,
+                location,
+                phone,
+                imageURL,
+                username,
+            })
+            .then((response) => {
+                user = response.data;
+            })
+            .catch((error) => setError(error))
+            .finally(() => setUserInfo(user));
+    };
+
   const getCurrentUser = () => {
     setUserLoad(false);
     setError();
@@ -420,6 +452,7 @@ export const AuthProvider = ({ children }) => {
         postLogin,
         logOut,
         postRegister,
+        putUserInfo,
         setError,
         getUser,
         postTornament,
