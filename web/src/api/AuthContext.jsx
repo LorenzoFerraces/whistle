@@ -166,6 +166,38 @@ export const AuthProvider = ({ children }) => {
       .finally(() => navigate('/tournaments'));
   };
 
+    const putUserInfo = (
+        id,
+        email,
+        preferredSport,
+        location,
+        phone,
+        imageURL,
+        username,
+    ) => {
+        var user;
+        setError();
+        if (!imageURL || imageURL === '') {
+            imageURL =
+                'https://ohsobserver.com/wp-content/uploads/2022/12/Guest-user.png';
+        }
+        axios
+            .put(url + `/user/${id}`, {
+                id,
+                email,
+                preferredSport,
+                location,
+                phone,
+                imageURL,
+                username,
+            })
+            .then((response) => {
+                user = response.data;
+            })
+            .catch((error) => setError(error))
+            .finally(() => setUserLoad(user));
+    };
+
   const getCurrentUser = () => {
     setUserLoad(false);
     setError();
@@ -420,6 +452,7 @@ export const AuthProvider = ({ children }) => {
         postLogin,
         logOut,
         postRegister,
+        putUserInfo,
         setError,
         getUser,
         postTornament,
