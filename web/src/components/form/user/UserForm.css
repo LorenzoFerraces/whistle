@@ -1,0 +1,45 @@
+.profile-form {
+  margin: 10px;
+}
+
+.profile-form .row {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-form .big-section {
+  flex: 1;
+}
+
+.profile-form .button-section {
+  align-content: flex-end;
+}
+
+.profile-form .small-section {
+  width: 30%;
+}
+
+.profile-form .private-section {
+  width: 13%;
+}
+
+.user-form {
+  width: 60%;
+  margin: auto;
+  margin-top: 3%;
+  padding: 10px;
+}
+
+.user-form form {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.user-form .nav {
+  align-items: center;
+  gap: 10px;
+  display: flex;
+  margin-right: 15px;
+  margin-left: 15px;
+  text-align: center;
+}

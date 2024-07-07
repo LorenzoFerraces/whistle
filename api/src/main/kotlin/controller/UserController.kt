@@ -1,5 +1,6 @@
 package controller
 
+import dto.TournamentDTO
 import dto.UserDTO
 import io.javalin.http.*
 import model.*
@@ -58,5 +59,39 @@ class UserController(private var system: System, private var tokenController: To
         }
     }
 
+    fun putUser(context: Context) {
+        tokenController.validateAndProcessBody<UpdateUser>(context) { updateUser ->
+            try {
+                val id = context.pathParam("id")
+                val user = system.updateUser(id, updateUser)
+                context.json(UserDTO(user))
+            } catch (e: UserNotFoundException) {
+                tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "User not found")
+            } catch (e: UsernameException) {
+                tokenController.errorResponse(context, HttpStatus.BAD_REQUEST, "Username in use")
+            } catch (e: EmailException) {
+                tokenController.errorResponse(context, HttpStatus.BAD_REQUEST, "Email in use")
+            }
+        }
+    }
 
+    fun getUserTournamentsSearch(context: Context) {
+        try {
+            val userId = context.pathParam("id")
+            var location = context.queryParam("location") ?: throw InvalidSportException()
+            var sport = context.queryParam("sport") ?: throw InvalidSportException()
+            var name = context.queryParam("name")
+            var results = system.searchTournamentsOfUser(userId, sport, location, name)
+            var tournamentsDTO = mutableListOf<TournamentDTO>()
+            for (tournament in results) {
+                var tournamentDTO = TournamentDTO(tournament)
+                tournamentsDTO.add(tournamentDTO)
+            }
+            context.json(tournamentsDTO)
+        }catch (e: UserNotFoundException){
+            tokenController.errorResponse(context, HttpStatus.NOT_FOUND, "User not found")
+        }catch (e: InvalidSportException){
+            tokenController.errorResponse(context, HttpStatus.BAD_REQUEST, "Invalid sport")
+        }
+    }
 }
