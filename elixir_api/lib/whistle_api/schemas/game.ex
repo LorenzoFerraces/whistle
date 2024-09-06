@@ -1,4 +1,4 @@
-defmodule WhistleApi.Schemas.Game do
+defmodule WhistleApi.Tournaments.Game do
   use Ecto.Schema
   import Ecto.Changeset
 

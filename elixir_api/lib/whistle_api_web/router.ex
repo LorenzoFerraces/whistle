@@ -7,6 +7,8 @@ defmodule WhistleApiWeb.Router do
 
   scope "/api", WhistleApiWeb do
     pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/tournaments", TournamentController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

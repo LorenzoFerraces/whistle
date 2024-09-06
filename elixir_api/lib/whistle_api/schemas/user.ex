@@ -1,4 +1,4 @@
-defmodule WhistleApi.Schemas.User do
+defmodule WhistleApi.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
